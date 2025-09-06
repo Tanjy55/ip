@@ -4,10 +4,15 @@ import java.util.ArrayList;
 
 public class Tank {
 
-    public static final String DOTTED_LINES = "____________________________________________________________\n";
+    private static final String DOTTED_LINES = "____________________________________________________________\n";
+    private static final String INVALID_INPUT = "My guy that's not a valid input!\n";
 
     static void printDottedLines() {
         System.out.print(DOTTED_LINES);
+    }
+
+    static void printInvalidInput() {
+        System.out.print(INVALID_INPUT);
     }
 
     static int getArrayIndex(ArrayList<Task> list, String line) {
@@ -15,8 +20,21 @@ public class Tank {
         return Integer.parseInt(parts[1]) - 1;
     }
 
+    static boolean checkIndexValidity(ArrayList<Task> list, int index) {
+        boolean isValid = index <= list.size();
+        if (!isValid) {
+            printInvalidInput();
+            printDottedLines();
+        }
+        return isValid;
+    }
+
     static void markTaskDone(ArrayList<Task> list, String line) {
         int arrayIndex = getArrayIndex(list, line);
+        if (!checkIndexValidity(list, arrayIndex)) {
+            return;
+        }
+        list.get(arrayIndex).setDone();
         printDottedLines();
         System.out.println("\t Good job! I've marked this task done:");
         System.out.println("\t\t"
@@ -28,6 +46,10 @@ public class Tank {
 
     static void markTaskNotDone(ArrayList<Task> list, String line) {
         int arrayIndex = getArrayIndex(list, line);
+        if (!checkIndexValidity(list, arrayIndex)) {
+            return;
+        }
+        list.get(arrayIndex).setNotDone();
         printDottedLines();
         System.out.println("\t Alright boss! I've marked this task as not done yet:");
         System.out.println("\t\t"
