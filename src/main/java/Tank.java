@@ -6,7 +6,13 @@ public class Tank {
 
     private static final String DOTTED_LINES = "____________________________________________________________\n";
     private static final String INVALID_INPUT = "Hey I didnt understand that, did you mean something else?\n";
-    private static final String HELP_SHEET = "Valid inputs are: \n 1) Todo \n 2) Deadline \n 3) list \n 4) mark \n 5) unmark\n";
+    private static final String HELP_SHEET = "Valid inputs are: \n" +
+            "1) \"list\", display the current list of tasks\n" +
+            "2) \"mark\", mark the specified task as done\n" +
+            "3) \"unmark\", mark the specified task as not done\n" +
+            "4) \"todo\", add the description afterwards to add this to the list\n" +
+            "5) \"deadline\", add \"\\by\" followed by the date to add this to the list\n" +
+            "6) \"event\", add \"\\from\" then date and \"\\to\" then date\n";
 
     static void printDottedLines() {
         System.out.print(DOTTED_LINES);
