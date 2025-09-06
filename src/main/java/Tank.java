@@ -5,7 +5,8 @@ import java.util.ArrayList;
 public class Tank {
 
     private static final String DOTTED_LINES = "____________________________________________________________\n";
-    private static final String INVALID_INPUT = "My guy that's not a valid input!\n";
+    private static final String INVALID_INPUT = "Hey I didnt understand that, did you mean something else?\n";
+    private static final String HELP_SHEET = "Valid inputs are: \n 1) Todo \n 2) Deadline \n 3) list \n 4) mark \n 5) unmark\n";
 
     static void printDottedLines() {
         System.out.print(DOTTED_LINES);
@@ -15,7 +16,24 @@ public class Tank {
         System.out.print(INVALID_INPUT);
     }
 
-    static int getArrayIndex(ArrayList<Task> list, String line) {
+    static void printHelp() {
+        System.out.print(HELP_SHEET);
+    }
+
+    static void printTaskMessage(ArrayList<Task> list, int index) {
+        System.out.println("\t" + list.get(index));
+    }
+
+    static void printTaskMessage(ArrayList<Task> list, String message, int index) {
+        System.out.println("\t" + message);
+        System.out.println("\t\t" + list.get(index));
+    }
+
+    static void printNumberOfTasks(ArrayList<Task> list) {
+        System.out.println(" Now you have " + list.size() + " tasks in the list.");
+    }
+
+    static int getArrayIndex(String line) {
         String[] parts = line.split(" ");
         return Integer.parseInt(parts[1]) - 1;
     }
@@ -26,36 +44,29 @@ public class Tank {
             printInvalidInput();
             printDottedLines();
         }
-        return isValid;
+        //return true if index is not valid
+        return !isValid;
     }
 
     static void markTaskDone(ArrayList<Task> list, String line) {
-        int arrayIndex = getArrayIndex(list, line);
-        if (!checkIndexValidity(list, arrayIndex)) {
+        int arrayIndex = getArrayIndex(line);
+        if (checkIndexValidity(list, arrayIndex)) {
             return;
         }
         list.get(arrayIndex).setDone();
         printDottedLines();
-        System.out.println("\t Good job! I've marked this task done:");
-        System.out.println("\t\t"
-                + list.get(arrayIndex).getStatusIcon()
-                + " "
-                + list.get(arrayIndex).description);
+        printTaskMessage(list, "Task marked as done! Nice job :)", arrayIndex);
         printDottedLines();
     }
 
     static void markTaskNotDone(ArrayList<Task> list, String line) {
-        int arrayIndex = getArrayIndex(list, line);
-        if (!checkIndexValidity(list, arrayIndex)) {
+        int arrayIndex = getArrayIndex(line);
+        if (checkIndexValidity(list, arrayIndex)) {
             return;
         }
         list.get(arrayIndex).setNotDone();
         printDottedLines();
-        System.out.println("\t Alright boss! I've marked this task as not done yet:");
-        System.out.println("\t\t"
-                + list.get(arrayIndex).getStatusIcon()
-                + " "
-                + list.get(arrayIndex).description);
+        printTaskMessage(list, "Task marked as not done :(", arrayIndex);
         printDottedLines();
     }
 
@@ -63,13 +74,51 @@ public class Tank {
         int taskCounter = 1;
         System.out.println("\tHere are the tasks in your list:");
         for (Task item : list) {
-            System.out.println("\t"
-                    + taskCounter
-                    + "."
-                    + item.getStatusIcon()
-                    + " " + item.description);
+            System.out.println("\t" + taskCounter + "." + item);
             taskCounter++;
         }
+        printDottedLines();
+    }
+
+    static void createTodo(ArrayList<Task> list, String line) {
+        list.add(new Todo(line.trim()));
+        int currentIndex = list.size() - 1;
+        printDottedLines();
+        System.out.println("Added Todo successfully!");
+        printTaskMessage(list, currentIndex);
+        printNumberOfTasks(list);
+        printDottedLines();
+    }
+
+    static void createDeadline(ArrayList<Task> list, String line) {
+        String[] message = line.split("/by", 2);
+        String description = message[0].trim();
+        String byDate = message[1].trim();
+        list.add(new Deadline(description, byDate));
+        int currentIndex = list.size() - 1;
+
+        printDottedLines();
+        System.out.println("Added that. Let's get it boss!");
+        printTaskMessage(list, currentIndex);
+        printNumberOfTasks(list);
+        printDottedLines();
+    }
+
+    static void createEvent(ArrayList<Task> list, String line) {
+        String[] message = line.split("/from", 2);
+        String description = message[0].trim();
+
+        String[] stringToSplit = message[1].split("/to", 2);
+        String from = stringToSplit[0].trim();
+        String to = stringToSplit[1].trim();
+
+        list.add(new Event(description, from, to));
+        int currentIndex = list.size() - 1;
+
+        printDottedLines();
+        System.out.println("Event has been added!");
+        printTaskMessage(list, currentIndex);
+        printNumberOfTasks(list);
         printDottedLines();
     }
 
@@ -84,16 +133,17 @@ public class Tank {
 
     public static void main(String[] args) {
 
-        String line = "";
+        String line;
         Scanner in = new Scanner(System.in);
         ArrayList<Task> listOfTasks = new ArrayList<>();
-        int numberOfTasks = 0;
 
+        //greet the user
         printDottedLines();
         System.out.println("Hello! I'm Tank");
-        System.out.println("What shall we talk about today?");
+        System.out.println("I'm here to help track your tasks, what shall we talk about today?");
         printDottedLines();
 
+        //expect inputs
         do {
             line = in.nextLine();
             if (line.equals("bye")) {
@@ -117,16 +167,28 @@ public class Tank {
                 markTaskNotDone(listOfTasks, line);
                 continue;
 
+            case "deadline":
+                createDeadline(listOfTasks, parts[1]);
+                continue;
+
+            case "todo":
+                createTodo(listOfTasks, parts[1]);
+                continue;
+
+            case "event":
+                createEvent(listOfTasks, parts[1]);
+                continue;
+
             default:
                 printDottedLines();
-                System.out.println("\t" + "added: " + line);
+                printInvalidInput();
+                printHelp();
                 printDottedLines();
-                listOfTasks.add(new Task(line));
-                numberOfTasks++;
             }
 
         } while (true);
 
+        //exit message
         printDottedLines();
         System.out.println("Bye. Hope to see you again soon!");
         printDottedLines();
