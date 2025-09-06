@@ -3,35 +3,62 @@ import java.util.ArrayList;
 
 
 public class Tank {
-    static void displayList(ArrayList<Task> list) {
-        int counter = 1;
-        System.out.println("\tHere are the tasks in your list:");
-        for (Task item : list) {
-            System.out.println("\t" + counter + "." + item.getStatusIcon() + " " + item.description);
-            counter++;
-        }
-        System.out.println("____________________________________________________________");
+
+    public static final String DOTTED_LINES = "____________________________________________________________\n";
+
+    static void printDottedLines() {
+        System.out.print(DOTTED_LINES);
+    }
+
+    static int getArrayIndex(ArrayList<Task> list, String line) {
+        String[] parts = line.split(" ");
+        return Integer.parseInt(parts[1]) - 1;
     }
 
     static void markTaskDone(ArrayList<Task> list, String line) {
-        String[] parts = line.split(" ");
-        int ArrayIndex = Integer.parseInt(parts[1]) - 1;
-        list.get(ArrayIndex).setDone();
-        System.out.println("____________________________________________________________");
+        int arrayIndex = getArrayIndex(list, line);
+        printDottedLines();
         System.out.println("\t Good job! I've marked this task done:");
-        System.out.println("\t\t" + list.get(ArrayIndex).getStatusIcon() + " " + list.get(ArrayIndex).description);
-        System.out.println("____________________________________________________________");
+        System.out.println("\t\t"
+                + list.get(arrayIndex).getStatusIcon()
+                + " "
+                + list.get(arrayIndex).description);
+        printDottedLines();
     }
 
     static void markTaskNotDone(ArrayList<Task> list, String line) {
-        String[] parts = line.split(" ");
-        int ArrayIndex = Integer.parseInt(parts[1]) - 1;
-        list.get(ArrayIndex).setNotDone();
-        System.out.println("____________________________________________________________");
+        int arrayIndex = getArrayIndex(list, line);
+        printDottedLines();
         System.out.println("\t Alright boss! I've marked this task as not done yet:");
-        System.out.println("\t\t" + list.get(ArrayIndex).getStatusIcon() + " " + list.get(ArrayIndex).description);
-        System.out.println("____________________________________________________________");
+        System.out.println("\t\t"
+                + list.get(arrayIndex).getStatusIcon()
+                + " "
+                + list.get(arrayIndex).description);
+        printDottedLines();
     }
+
+    static void displayList(ArrayList<Task> list) {
+        int taskCounter = 1;
+        System.out.println("\tHere are the tasks in your list:");
+        for (Task item : list) {
+            System.out.println("\t"
+                    + taskCounter
+                    + "."
+                    + item.getStatusIcon()
+                    + " " + item.description);
+            taskCounter++;
+        }
+        printDottedLines();
+    }
+
+    /**
+     * Tank greets the user (The name comes from the movie matrix, Tank is the operator over the phone)
+     * Awaits keyboard input
+     * 1) if command is "list", display the current list of tasks
+     * 2) if command is "mark", mark the specified task as done
+     * 3) if command is "unmark", mark the specified task as not done
+     * Exits once user inputs "bye"
+     */
 
     public static void main(String[] args) {
 
@@ -40,38 +67,46 @@ public class Tank {
         ArrayList<Task> listOfTasks = new ArrayList<>();
         int numberOfTasks = 0;
 
-        System.out.println("____________________________________________________________");
+        printDottedLines();
         System.out.println("Hello! I'm Tank");
-        System.out.println("What shall we talk about today?\n");
-        System.out.println("____________________________________________________________\n");
+        System.out.println("What shall we talk about today?");
+        printDottedLines();
 
         do {
             line = in.nextLine();
-            if (line.equals(("list"))) {
+            if (line.equals("bye")) {
+                break;
+            }
+
+            //format line string for switch case
+            String[] parts = line.split("\\s+", 2);
+            String switchCommand = parts[0].toLowerCase();
+
+            switch (switchCommand) {
+            case "list":
                 displayList(listOfTasks);
                 continue;
-            }
 
-            if (line.contains(("unmark"))) {
-                markTaskNotDone(listOfTasks, line);
-                continue;
-            }
-
-            if (line.contains(("mark"))) {
+            case "mark":
                 markTaskDone(listOfTasks, line);
                 continue;
-            }
 
-            if (!line.equals("bye")) {
-                System.out.println("____________________________________________________________");
+            case "unmark":
+                markTaskNotDone(listOfTasks, line);
+                continue;
+
+            default:
+                printDottedLines();
                 System.out.println("\t" + "added: " + line);
-                System.out.println("____________________________________________________________");
+                printDottedLines();
                 listOfTasks.add(new Task(line));
                 numberOfTasks++;
             }
-        } while (!line.equals("bye"));
-        System.out.println("____________________________________________________________");
+
+        } while (true);
+
+        printDottedLines();
         System.out.println("Bye. Hope to see you again soon!");
-        System.out.println("____________________________________________________________");
+        printDottedLines();
     }
 }
