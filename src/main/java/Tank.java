@@ -10,9 +10,10 @@ public class Tank {
             "1) \"list\", display the current list of tasks\n" +
             "2) \"mark\", mark the specified task as done\n" +
             "3) \"unmark\", mark the specified task as not done\n" +
-            "4) \"todo\", add the description afterwards to add this to the list\n" +
-            "5) \"deadline\", add \"\\by\" followed by the date to add this to the list\n" +
-            "6) \"event\", add \"\\from\" then date and \"\\to\" then date\n";
+            "4) \"delete\", delete the specified task\n" +
+            "5) \"todo\", add the description afterwards to add this to the list\n" +
+            "6) \"deadline\", add \"\\by\" followed by the date to add this to the list\n" +
+            "7) \"event\", add \"\\from\" then date and \"\\to\" then date\n";
 
     static void printDottedLines() {
         System.out.print(DOTTED_LINES);
@@ -45,13 +46,71 @@ public class Tank {
     }
 
     static boolean checkIndexValidity(ArrayList<Task> list, int index) {
-        boolean isValid = index <= list.size();
+        boolean isValid = index <= list.size() - 1;
         if (!isValid) {
             printInvalidInput();
             printDottedLines();
         }
         //return true if index is not valid
         return !isValid;
+    }
+
+    static boolean checkCommandValidity(String[] parts) {
+        if (parts.length == 1) {
+            printInvalidInput();
+            printDottedLines();
+            return true;
+        }
+        return false;
+    }
+
+    static boolean checkValidDeadline(String line) {
+        if (line.isEmpty()) {
+            System.out.println("Invalid deadline format, please try again.");
+            printDottedLines();
+            return true;
+        }
+
+        if (!line.contains("/by")) {
+            System.out.println("Invalid deadline format, did you forget to include \"/by\"? please try again.");
+            printDottedLines();
+            return true;
+        }
+
+        String[] message = processDeadlineInput(line);
+        String description = message[0];
+        String byDate = message[1];
+        if (description.isEmpty() || byDate.isEmpty()) {
+            System.out.println("Invalid deadline format, did you forget to specify the deadline correctly?");
+            printDottedLines();
+            return true;
+        }
+        return false;
+    }
+
+    static boolean checkValidEvent(String line) {
+        if (line.isEmpty()) {
+            System.out.println("Invalid event format, please try again.");
+            printDottedLines();
+            return true;
+        }
+
+        if (!line.contains("/from") || !line.contains("/to")) {
+            System.out.println("Invalid event format, did you forget to include \"/from\" or \"/to\"? please try again.");
+            printDottedLines();
+            return true;
+        }
+
+        String[] message = processEventInput(line);
+        String description = message[0];
+        String from = message[1];
+        String to = message[2];
+        if (description.isEmpty() || from.isEmpty() || to.isEmpty()) {
+            System.out.println("Invalid event format, did you forget to specify the deadline correctly?");
+            printDottedLines();
+            return true;
+        }
+        return false;
     }
 
     static void markTaskDone(ArrayList<Task> list, String line) {
@@ -76,6 +135,17 @@ public class Tank {
         printDottedLines();
     }
 
+    static void deleteTask(ArrayList<Task> list, String line) {
+        int arrayIndex = getArrayIndex(line);
+        if (checkIndexValidity(list, arrayIndex)) {
+            return;
+        }
+        list.remove(arrayIndex);
+        printDottedLines();
+        System.out.println("Task deleted successfully! Displaying new list: \n");
+        displayList(list);
+    }
+
     static void displayList(ArrayList<Task> list) {
         int taskCounter = 1;
         System.out.println("\tHere are the tasks in your list:");
@@ -96,11 +166,31 @@ public class Tank {
         printDottedLines();
     }
 
-    static void createDeadline(ArrayList<Task> list, String line) {
+    static String[] processDeadlineInput(String line) {
         String[] message = line.split("/by", 2);
-        String description = message[0].trim();
-        String byDate = message[1].trim();
-        list.add(new Deadline(description, byDate));
+        message[0] = message[0].trim();
+        message[1] = message[1].trim();
+        return message;
+    }
+
+    static String[] processEventInput(String line) {
+        String[] returnArray = new String[3];
+        String[] message = line.split("/from", 2);
+        returnArray[0] = message[0].trim();
+
+        String[] stringToSplit = message[1].split("/to", 2);
+        returnArray[1] = stringToSplit[0].trim();
+        returnArray[2] = stringToSplit[1].trim();
+        return returnArray;
+    }
+
+    static void createDeadline(ArrayList<Task> list, String line) {
+
+        if (checkValidDeadline(line)) {
+            return;
+        }
+        String[] deadlineInput = processDeadlineInput(line);
+        list.add(new Deadline(deadlineInput[0], deadlineInput[1]));
         int currentIndex = list.size() - 1;
 
         printDottedLines();
@@ -111,14 +201,13 @@ public class Tank {
     }
 
     static void createEvent(ArrayList<Task> list, String line) {
-        String[] message = line.split("/from", 2);
-        String description = message[0].trim();
 
-        String[] stringToSplit = message[1].split("/to", 2);
-        String from = stringToSplit[0].trim();
-        String to = stringToSplit[1].trim();
+        if (checkValidEvent(line)) {
+            return;
+        }
+        String[] eventInput = processEventInput(line);
 
-        list.add(new Event(description, from, to));
+        list.add(new Event(eventInput[0], eventInput[1], eventInput[2]));
         int currentIndex = list.size() - 1;
 
         printDottedLines();
@@ -127,6 +216,7 @@ public class Tank {
         printNumberOfTasks(list);
         printDottedLines();
     }
+
 
     /**
      * Tank greets the user (The name comes from the movie matrix, Tank is the operator over the phone)
@@ -173,15 +263,28 @@ public class Tank {
                 markTaskNotDone(listOfTasks, line);
                 continue;
 
+            case "delete":
+                deleteTask(listOfTasks, line);
+                continue;
+
             case "deadline":
+                if (checkCommandValidity(parts)) {
+                    continue;
+                }
                 createDeadline(listOfTasks, parts[1]);
                 continue;
 
             case "todo":
+                if (checkCommandValidity(parts)) {
+                    continue;
+                }
                 createTodo(listOfTasks, parts[1]);
                 continue;
 
             case "event":
+                if (checkCommandValidity(parts)) {
+                    continue;
+                }
                 createEvent(listOfTasks, parts[1]);
                 continue;
 
