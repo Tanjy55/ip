@@ -45,34 +45,45 @@ public class Tank {
         return Integer.parseInt(parts[1]) - 1;
     }
 
-    static boolean checkIndexValidity(ArrayList<Task> list, int index) {
+    static void checkIndexValidity(ArrayList<Task> list, int index) throws TankException {
         boolean isValid = index <= list.size() - 1;
         if (!isValid) {
-            printInvalidInput();
-            printDottedLines();
+            throw new TankException("Incorrect specified number in command");
         }
-        //return true if index is not valid
-        return !isValid;
     }
 
-    static boolean checkCommandValidity(String[] parts) {
+    static void checkCommandValidity(String[] parts) throws TankException {
         if (parts.length == 1) {
-            printInvalidInput();
-            printDottedLines();
-            return true;
+            throw new TankException("Invalid command given");
         }
-        return false;
+    }
+
+    static void checkIfStringEmpty(String string) throws TankException {
+        if (string.isEmpty()) {
+            throw new TankException("Invalid input, please check if some parameters are missing!");
+        }
+    }
+
+    static void checkIfStringContains(String string, String string2) throws TankException {
+        if (!string.contains(string2)) {
+            throw new TankException("Hmmm something went wrong, check if you forgot to include: ");
+        }
     }
 
     static boolean checkValidDeadline(String line) {
-        if (line.isEmpty()) {
-            System.out.println("Invalid deadline format, please try again.");
+
+        try {
+            checkIfStringEmpty(line);
+        } catch (TankException e) {
+            System.out.println("Error" + e.getMessage());
             printDottedLines();
             return true;
         }
 
-        if (!line.contains("/by")) {
-            System.out.println("Invalid deadline format, did you forget to include \"/by\"? please try again.");
+        try {
+            checkIfStringContains(line, "/by");
+        } catch (Exception e) {
+            System.out.println(e.getMessage() + "/by");
             printDottedLines();
             return true;
         }
@@ -80,23 +91,33 @@ public class Tank {
         String[] message = processDeadlineInput(line);
         String description = message[0];
         String byDate = message[1];
-        if (description.isEmpty() || byDate.isEmpty()) {
+
+        try {
+            checkIfStringEmpty(description);
+            checkIfStringEmpty(byDate);
+        } catch (Exception e) {
             System.out.println("Invalid deadline format, did you forget to specify the deadline correctly?");
             printDottedLines();
             return true;
         }
+
         return false;
     }
 
     static boolean checkValidEvent(String line) {
-        if (line.isEmpty()) {
-            System.out.println("Invalid event format, please try again.");
+        try {
+            checkIfStringEmpty(line);
+        } catch (TankException e) {
+            System.out.println("Error" + e.getMessage());
             printDottedLines();
             return true;
         }
 
-        if (!line.contains("/from") || !line.contains("/to")) {
-            System.out.println("Invalid event format, did you forget to include \"/from\" or \"/to\"? please try again.");
+        try {
+            checkIfStringContains(line, "/from");
+            checkIfStringContains(line, "/to");
+        } catch (Exception e) {
+            System.out.println(e.getMessage() + "/from or /to");
             printDottedLines();
             return true;
         }
@@ -105,19 +126,31 @@ public class Tank {
         String description = message[0];
         String from = message[1];
         String to = message[2];
-        if (description.isEmpty() || from.isEmpty() || to.isEmpty()) {
-            System.out.println("Invalid event format, did you forget to specify the deadline correctly?");
+
+        try {
+            checkIfStringEmpty(description);
+            checkIfStringEmpty(from);
+            checkIfStringEmpty(to);
+        } catch (Exception e) {
+            System.out.println("Invalid event format, did you forget to specify the details correctly?");
             printDottedLines();
             return true;
         }
+
         return false;
     }
 
     static void markTaskDone(ArrayList<Task> list, String line) {
         int arrayIndex = getArrayIndex(line);
-        if (checkIndexValidity(list, arrayIndex)) {
+
+        try {
+            checkIndexValidity(list, arrayIndex);
+        } catch (TankException e) {
+            System.out.println("Error: " + e.getMessage());
+            printDottedLines();
             return;
         }
+
         list.get(arrayIndex).setDone();
         printDottedLines();
         printTaskMessage(list, "Task marked as done! Nice job :)", arrayIndex);
@@ -126,9 +159,15 @@ public class Tank {
 
     static void markTaskNotDone(ArrayList<Task> list, String line) {
         int arrayIndex = getArrayIndex(line);
-        if (checkIndexValidity(list, arrayIndex)) {
+
+        try {
+            checkIndexValidity(list, arrayIndex);
+        } catch (TankException e) {
+            System.out.println("Error: " + e.getMessage());
+            printDottedLines();
             return;
         }
+
         list.get(arrayIndex).setNotDone();
         printDottedLines();
         printTaskMessage(list, "Task marked as not done :(", arrayIndex);
@@ -137,9 +176,15 @@ public class Tank {
 
     static void deleteTask(ArrayList<Task> list, String line) {
         int arrayIndex = getArrayIndex(line);
-        if (checkIndexValidity(list, arrayIndex)) {
+
+        try {
+            checkIndexValidity(list, arrayIndex);
+        } catch (TankException e) {
+            System.out.println("Error: " + e.getMessage());
+            printDottedLines();
             return;
         }
+
         list.remove(arrayIndex);
         printDottedLines();
         System.out.println("Task deleted successfully! Displaying new list: \n");
@@ -268,21 +313,33 @@ public class Tank {
                 continue;
 
             case "deadline":
-                if (checkCommandValidity(parts)) {
+                try {
+                    checkCommandValidity(parts);
+                } catch (TankException e) {
+                    System.out.println("Error: " + e.getMessage());
+                    printDottedLines();
                     continue;
                 }
                 createDeadline(listOfTasks, parts[1]);
                 continue;
 
             case "todo":
-                if (checkCommandValidity(parts)) {
+                try {
+                    checkCommandValidity(parts);
+                } catch (TankException e) {
+                    System.out.println("Error: " + e.getMessage());
+                    printDottedLines();
                     continue;
                 }
                 createTodo(listOfTasks, parts[1]);
                 continue;
 
             case "event":
-                if (checkCommandValidity(parts)) {
+                try {
+                    checkCommandValidity(parts);
+                } catch (TankException e) {
+                    System.out.println("Error: " + e.getMessage());
+                    printDottedLines();
                     continue;
                 }
                 createEvent(listOfTasks, parts[1]);
