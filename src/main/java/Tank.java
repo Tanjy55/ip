@@ -104,7 +104,6 @@ public class Tank {
         String description = message[0];
         String from = message[1];
         String to = message[2];
-        System.out.println(description + from + to);
         if (description.isEmpty() || from.isEmpty() || to.isEmpty()) {
             System.out.println("Invalid event format, did you forget to specify the deadline correctly?");
             printDottedLines();
@@ -206,6 +205,17 @@ public class Tank {
         printDottedLines();
     }
 
+    static void deleteTask(ArrayList<Task> list, String line) {
+        int arrayIndex = getArrayIndex(line);
+        if (checkIndexValidity(list, arrayIndex)) {
+            return;
+        }
+        list.remove(arrayIndex);
+        printDottedLines();
+        System.out.println("Task deleted successfully! Displaying new list: \n");
+        displayList(list);
+    }
+
     /**
      * Tank greets the user (The name comes from the movie matrix, Tank is the operator over the phone)
      * Awaits keyboard input
@@ -238,8 +248,6 @@ public class Tank {
             String[] parts = line.split("\\s+", 2);
             String switchCommand = parts[0].toLowerCase();
 
-
-
             switch (switchCommand) {
             case "list":
                 displayList(listOfTasks);
@@ -251,6 +259,10 @@ public class Tank {
 
             case "unmark":
                 markTaskNotDone(listOfTasks, line);
+                continue;
+
+            case "delete":
+                deleteTask(listOfTasks, line);
                 continue;
 
             case "deadline":
