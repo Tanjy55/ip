@@ -10,9 +10,10 @@ public class Tank {
             "1) \"list\", display the current list of tasks\n" +
             "2) \"mark\", mark the specified task as done\n" +
             "3) \"unmark\", mark the specified task as not done\n" +
-            "4) \"todo\", add the description afterwards to add this to the list\n" +
-            "5) \"deadline\", add \"\\by\" followed by the date to add this to the list\n" +
-            "6) \"event\", add \"\\from\" then date and \"\\to\" then date\n";
+            "4) \"delete\", delete the specified task\n" +
+            "5) \"todo\", add the description afterwards to add this to the list\n" +
+            "6) \"deadline\", add \"\\by\" followed by the date to add this to the list\n" +
+            "7) \"event\", add \"\\from\" then date and \"\\to\" then date\n";
 
     static void printDottedLines() {
         System.out.print(DOTTED_LINES);
