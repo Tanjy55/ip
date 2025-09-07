@@ -45,7 +45,7 @@ public class Tank {
     }
 
     static boolean checkIndexValidity(ArrayList<Task> list, int index) {
-        boolean isValid = index <= list.size();
+        boolean isValid = index <= list.size() - 1;
         if (!isValid) {
             printInvalidInput();
             printDottedLines();
@@ -58,7 +58,7 @@ public class Tank {
         if (parts.length == 1) {
             printInvalidInput();
             printDottedLines();
-           return true;
+            return true;
         }
         return false;
     }
@@ -134,6 +134,17 @@ public class Tank {
         printDottedLines();
     }
 
+    static void deleteTask(ArrayList<Task> list, String line) {
+        int arrayIndex = getArrayIndex(line);
+        if (checkIndexValidity(list, arrayIndex)) {
+            return;
+        }
+        list.remove(arrayIndex);
+        printDottedLines();
+        System.out.println("Task deleted successfully! Displaying new list: \n");
+        displayList(list);
+    }
+
     static void displayList(ArrayList<Task> list) {
         int taskCounter = 1;
         System.out.println("\tHere are the tasks in your list:");
@@ -162,7 +173,7 @@ public class Tank {
     }
 
     static String[] processEventInput(String line) {
-        String[] returnArray = new  String[3];
+        String[] returnArray = new String[3];
         String[] message = line.split("/from", 2);
         returnArray[0] = message[0].trim();
 
@@ -205,16 +216,6 @@ public class Tank {
         printDottedLines();
     }
 
-    static void deleteTask(ArrayList<Task> list, String line) {
-        int arrayIndex = getArrayIndex(line);
-        if (checkIndexValidity(list, arrayIndex)) {
-            return;
-        }
-        list.remove(arrayIndex);
-        printDottedLines();
-        System.out.println("Task deleted successfully! Displaying new list: \n");
-        displayList(list);
-    }
 
     /**
      * Tank greets the user (The name comes from the movie matrix, Tank is the operator over the phone)
@@ -266,21 +267,21 @@ public class Tank {
                 continue;
 
             case "deadline":
-                if(checkCommandValidity(parts)) {
+                if (checkCommandValidity(parts)) {
                     continue;
                 }
                 createDeadline(listOfTasks, parts[1]);
                 continue;
 
             case "todo":
-                if(checkCommandValidity(parts)) {
+                if (checkCommandValidity(parts)) {
                     continue;
                 }
                 createTodo(listOfTasks, parts[1]);
                 continue;
 
             case "event":
-                if(checkCommandValidity(parts)) {
+                if (checkCommandValidity(parts)) {
                     continue;
                 }
                 createEvent(listOfTasks, parts[1]);
