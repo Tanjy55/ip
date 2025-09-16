@@ -1,3 +1,5 @@
+package tank;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -13,7 +15,8 @@ public class Tank {
             "4) \"delete\", delete the specified task\n" +
             "5) \"todo\", add the description afterwards to add this to the list\n" +
             "6) \"deadline\", add \"\\by\" followed by the date to add this to the list\n" +
-            "7) \"event\", add \"\\from\" then date and \"\\to\" then date\n";
+            "7) \"event\", add \"\\from\" then date and \"\\to\" then date\n" +
+            "8) \"bye\" to finish the chat\n";
 
     static void printDottedLines() {
         System.out.print(DOTTED_LINES);
