@@ -1,11 +1,15 @@
 package tank;
 
+import java.io.File;
 import java.util.Scanner;
 import java.util.ArrayList;
-
+import java.io.FileWriter;
+import java.io.BufferedWriter;
+import java.io.IOException;
 
 public class Tank {
 
+    private static final String SAVE_LOCATION = "./data/tank.txt";
     private static final String DOTTED_LINES = "____________________________________________________________\n";
     private static final String INVALID_INPUT = "Hey I didnt understand that, did you mean something else?\n";
     private static final String HELP_SHEET = "Valid inputs are: \n" +
@@ -158,6 +162,7 @@ public class Tank {
         printDottedLines();
         printTaskMessage(list, "Task marked as done! Nice job :)", arrayIndex);
         printDottedLines();
+        saveTasksToFile(list);
     }
 
     static void markTaskNotDone(ArrayList<Task> list, String line) {
@@ -175,23 +180,7 @@ public class Tank {
         printDottedLines();
         printTaskMessage(list, "Task marked as not done :(", arrayIndex);
         printDottedLines();
-    }
-
-    static void deleteTask(ArrayList<Task> list, String line) {
-        int arrayIndex = getArrayIndex(line);
-
-        try {
-            checkIndexValidity(list, arrayIndex);
-        } catch (TankException e) {
-            System.out.println("Error: " + e.getMessage());
-            printDottedLines();
-            return;
-        }
-
-        list.remove(arrayIndex);
-        printDottedLines();
-        System.out.println("Task deleted successfully! Displaying new list: \n");
-        displayList(list);
+        saveTasksToFile(list);
     }
 
     static void displayList(ArrayList<Task> list) {
@@ -212,6 +201,7 @@ public class Tank {
         printTaskMessage(list, currentIndex);
         printNumberOfTasks(list);
         printDottedLines();
+        saveTasksToFile(list);
     }
 
     static String[] processDeadlineInput(String line) {
@@ -219,17 +209,6 @@ public class Tank {
         message[0] = message[0].trim();
         message[1] = message[1].trim();
         return message;
-    }
-
-    static String[] processEventInput(String line) {
-        String[] returnArray = new String[3];
-        String[] message = line.split("/from", 2);
-        returnArray[0] = message[0].trim();
-
-        String[] stringToSplit = message[1].split("/to", 2);
-        returnArray[1] = stringToSplit[0].trim();
-        returnArray[2] = stringToSplit[1].trim();
-        return returnArray;
     }
 
     static void createDeadline(ArrayList<Task> list, String line) {
@@ -246,6 +225,18 @@ public class Tank {
         printTaskMessage(list, currentIndex);
         printNumberOfTasks(list);
         printDottedLines();
+        saveTasksToFile(list);
+    }
+
+    static String[] processEventInput(String line) {
+        String[] returnArray = new String[3];
+        String[] message = line.split("/from", 2);
+        returnArray[0] = message[0].trim();
+
+        String[] stringToSplit = message[1].split("/to", 2);
+        returnArray[1] = stringToSplit[0].trim();
+        returnArray[2] = stringToSplit[1].trim();
+        return returnArray;
     }
 
     static void createEvent(ArrayList<Task> list, String line) {
@@ -263,6 +254,36 @@ public class Tank {
         printTaskMessage(list, currentIndex);
         printNumberOfTasks(list);
         printDottedLines();
+        saveTasksToFile(list);
+    }
+
+    static void deleteTask(ArrayList<Task> list, String line) {
+        int arrayIndex = getArrayIndex(line);
+
+        try {
+            checkIndexValidity(list, arrayIndex);
+        } catch (TankException e) {
+            System.out.println("Error: " + e.getMessage());
+            printDottedLines();
+            return;
+        }
+
+        list.remove(arrayIndex);
+        printDottedLines();
+        System.out.println("Task deleted successfully! Displaying new list: \n");
+        displayList(list);
+        saveTasksToFile(list);
+    }
+
+    static void saveTasksToFile(ArrayList<Task> list) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(SAVE_LOCATION))) {
+            for (Task t : list) {
+                writer.write(t.toString());   // Write the line
+                writer.newLine();      // Add a newline after each line
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred while saving. Check if file path is invalid or file deleted.");
+        }
     }
 
 
