@@ -143,6 +143,16 @@ public class Tank {
         return false;
     }
 
+    static void displayList(ArrayList<Task> list) {
+        int taskCounter = 1;
+        System.out.println("\tHere are the tasks in your list:");
+        for (Task item : list) {
+            System.out.println("\t" + taskCounter + "." + item);
+            taskCounter++;
+        }
+        printDottedLines();
+    }
+
     static void markTaskDone(ArrayList<Task> list, String line) {
         int arrayIndex = getArrayIndex(line);
 
@@ -187,20 +197,10 @@ public class Tank {
             printDottedLines();
             return;
         }
-
-        list.remove(arrayIndex);
         printDottedLines();
-        System.out.println("Task deleted successfully! Displaying new list: \n");
-        displayList(list);
-    }
-
-    static void displayList(ArrayList<Task> list) {
-        int taskCounter = 1;
-        System.out.println("\tHere are the tasks in your list:");
-        for (Task item : list) {
-            System.out.println("\t" + taskCounter + "." + item);
-            taskCounter++;
-        }
+        printTaskMessage(list, "Task deleted :(", arrayIndex);
+        list.remove(arrayIndex);
+        printNumberOfTasks(list);
         printDottedLines();
     }
 
