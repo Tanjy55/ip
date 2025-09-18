@@ -4,18 +4,89 @@ I'm here to help track your tasks, what shall we talk about today?
 ____________________________________________________________
 ____________________________________________________________
 Added Todo successfully!
-	[T][ ] borrow book
+	[T][ ] a
  Now you have 1 tasks in the list.
 ____________________________________________________________
 	Here are the tasks in your list:
-	1.[T][ ] borrow book
+	1.[T][ ] a
 ____________________________________________________________
 ____________________________________________________________
 Added that. Let's get it boss!
-	[D][ ] return book (by: Sunday)
+	[D][ ] x (by: y)
  Now you have 2 tasks in the list.
 ____________________________________________________________
-	Here are the tasks in your list:
-	1.[T][ ] borrow book
-	2.[D][ ] return book (by: Sunday)
 ____________________________________________________________
+Hey I didnt understand that, did you mean something else?
+Valid inputs are:
+1) "list", display the current list of tasks
+2) "mark", mark the specified task as done
+3) "unmark", mark the specified task as not done
+4) "delete", delete the specified task
+5) "todo", add the description afterwards to add this to the list
+6) "deadline", add "\by" followed by the date to add this to the list
+7) "event", add "\from" then date and "\to" then date
+8) "bye" to finish the chat
+____________________________________________________________
+	Here are the tasks in your list:
+	1.[T][ ] a
+	2.[D][ ] x (by: y)
+____________________________________________________________
+____________________________________________________________
+Event has been added!
+	[E][ ] t (from: 5, to: 6)
+ Now you have 3 tasks in the list.
+____________________________________________________________
+	Here are the tasks in your list:
+	1.[T][ ] a
+	2.[D][ ] x (by: y)
+	3.[E][ ] t (from: 5, to: 6)
+____________________________________________________________
+____________________________________________________________
+	Task marked as done! Nice job :)
+		[T][X] a
+____________________________________________________________
+____________________________________________________________
+	Task marked as not done :(
+		[T][ ] a
+____________________________________________________________
+____________________________________________________________
+	Task marked as done! Nice job :)
+		[D][X] x (by: y)
+____________________________________________________________
+	Here are the tasks in your list:
+	1.[T][ ] a
+	2.[D][X] x (by: y)
+	3.[E][ ] t (from: 5, to: 6)
+____________________________________________________________
+____________________________________________________________
+Task deleted successfully! Displaying new list:
+
+	Here are the tasks in your list:
+	1.[T][ ] a
+	2.[D][X] x (by: y)
+____________________________________________________________
+Error: Invalid command given
+____________________________________________________________
+Hmmm something went wrong, check if you forgot to include: /by
+____________________________________________________________
+Invalid deadline format, did you forget to specify the deadline correctly?
+____________________________________________________________
+Invalid deadline format, did you forget to specify the deadline correctly?
+____________________________________________________________
+Error: Invalid command given
+____________________________________________________________
+Hmmm something went wrong, check if you forgot to include: /from or /to
+____________________________________________________________
+Hmmm something went wrong, check if you forgot to include: /from or /to
+____________________________________________________________
+Invalid event format, did you forget to specify the details correctly?
+____________________________________________________________
+	Here are the tasks in your list:
+	1.[T][ ] a
+	2.[D][X] x (by: y)
+____________________________________________________________
+____________________________________________________________
+Bye. Hope to see you again soon!
+____________________________________________________________
+
+Process finished with exit code 0

@@ -1,4 +1,22 @@
-todo borrow book
+todo a
 list
-deadline return book /by Sunday
+deadline x /by y
+lsit
 list
+event t /from 5 /to 6
+list
+mark 1
+unmark 1
+mark 2
+list
+delete 3
+todo
+deadline dwa
+deadline x/by
+deadline /byy
+event
+event /from
+event /from/ to
+event /from /to
+list
+bye
