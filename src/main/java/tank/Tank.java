@@ -2,21 +2,26 @@ package tank;
 
 import java.util.Scanner;
 import java.util.ArrayList;
-
+import java.io.FileWriter;
+import java.io.BufferedWriter;
+import java.io.IOException;
 
 public class Tank {
 
+    private static final String SAVE_LOCATION = "./data/tank.txt";
     private static final String DOTTED_LINES = "____________________________________________________________\n";
     private static final String INVALID_INPUT = "Hey I didnt understand that, did you mean something else?\n";
-    private static final String HELP_SHEET = "Valid inputs are: \n" +
-            "1) \"list\", display the current list of tasks\n" +
-            "2) \"mark\", mark the specified task as done\n" +
-            "3) \"unmark\", mark the specified task as not done\n" +
-            "4) \"delete\", delete the specified task\n" +
-            "5) \"todo\", add the description afterwards to add this to the list\n" +
-            "6) \"deadline\", add \"\\by\" followed by the date to add this to the list\n" +
-            "7) \"event\", add \"\\from\" then date and \"\\to\" then date\n" +
-            "8) \"bye\" to finish the chat\n";
+    private static final String HELP_SHEET = """
+            Valid inputs are:\s
+            1) "list", display the current list of tasks
+            2) "mark", mark the specified task as done
+            3) "unmark", mark the specified task as not done
+            4) "delete", delete the specified task
+            5) "todo", add the description afterwards to add this to the list
+            6) "deadline", add "\\by" followed by the date to add this to the list
+            7) "event", add "\\from" then date and "\\to" then date
+            8) "bye" to finish the chat
+            """;
 
     static void printDottedLines() {
         System.out.print(DOTTED_LINES);
@@ -143,16 +148,6 @@ public class Tank {
         return false;
     }
 
-    static void displayList(ArrayList<Task> list) {
-        int taskCounter = 1;
-        System.out.println("\tHere are the tasks in your list:");
-        for (Task item : list) {
-            System.out.println("\t" + taskCounter + "." + item);
-            taskCounter++;
-        }
-        printDottedLines();
-    }
-
     static void markTaskDone(ArrayList<Task> list, String line) {
         int arrayIndex = getArrayIndex(line);
 
@@ -168,6 +163,7 @@ public class Tank {
         printDottedLines();
         printTaskMessage(list, "Task marked as done! Nice job :)", arrayIndex);
         printDottedLines();
+        saveTasksToFile(list);
     }
 
     static void markTaskNotDone(ArrayList<Task> list, String line) {
@@ -185,22 +181,16 @@ public class Tank {
         printDottedLines();
         printTaskMessage(list, "Task marked as not done :(", arrayIndex);
         printDottedLines();
+        saveTasksToFile(list);
     }
 
-    static void deleteTask(ArrayList<Task> list, String line) {
-        int arrayIndex = getArrayIndex(line);
-
-        try {
-            checkIndexValidity(list, arrayIndex);
-        } catch (TankException e) {
-            System.out.println("Error: " + e.getMessage());
-            printDottedLines();
-            return;
+    static void displayList(ArrayList<Task> list) {
+        int taskCounter = 1;
+        System.out.println("\tHere are the tasks in your list:");
+        for (Task item : list) {
+            System.out.println("\t" + taskCounter + "." + item);
+            taskCounter++;
         }
-        printDottedLines();
-        printTaskMessage(list, "Task deleted :(", arrayIndex);
-        list.remove(arrayIndex);
-        printNumberOfTasks(list);
         printDottedLines();
     }
 
@@ -212,6 +202,7 @@ public class Tank {
         printTaskMessage(list, currentIndex);
         printNumberOfTasks(list);
         printDottedLines();
+        saveTasksToFile(list);
     }
 
     static String[] processDeadlineInput(String line) {
@@ -246,7 +237,9 @@ public class Tank {
         printTaskMessage(list, currentIndex);
         printNumberOfTasks(list);
         printDottedLines();
+        saveTasksToFile(list);
     }
+
 
     static void createEvent(ArrayList<Task> list, String line) {
 
@@ -263,6 +256,36 @@ public class Tank {
         printTaskMessage(list, currentIndex);
         printNumberOfTasks(list);
         printDottedLines();
+        saveTasksToFile(list);
+    }
+
+    static void deleteTask(ArrayList<Task> list, String line) {
+        int arrayIndex = getArrayIndex(line);
+
+        try {
+            checkIndexValidity(list, arrayIndex);
+        } catch (TankException e) {
+            System.out.println("Error: " + e.getMessage());
+            printDottedLines();
+            return;
+        }
+
+        list.remove(arrayIndex);
+        printDottedLines();
+        System.out.println("Task deleted successfully! Displaying new list: \n");
+        displayList(list);
+        saveTasksToFile(list);
+    }
+
+    static void saveTasksToFile(ArrayList<Task> list) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(SAVE_LOCATION))) {
+            for (Task t : list) {
+                writer.write(t.toString());   // Write the line
+                writer.newLine();      // Add a newline after each line
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred while saving. Check if file path is invalid or file deleted.");
+        }
     }
 
 
