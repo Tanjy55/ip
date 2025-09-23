@@ -23,6 +23,6 @@ public class Event extends Task {
     }
 
     public String toSave() {
-        return type + " " + isDone + " " + super.description + " " + from + " " + to;
+        return type + " | "  + isDone + " | " + super.description + " | " + from + " | " + to;
     }
 }

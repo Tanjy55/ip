@@ -32,17 +32,29 @@ public class Task {
 
     public static Task fromString(String type, String[] arguments) {
         switch (type) {
-            case "Todo":
-                return new Todo(arguments[2]);
-            case "Deadline":
-                return new Deadline(arguments[2], arguments[3]);
-            case "Event":
-                return new Event(arguments[2], arguments[3], arguments[4]);
+        case "Todo":
+            Todo addTodo = new Todo(arguments[2]);
+            setTaskDoneWhenLoading(addTodo, Boolean.parseBoolean(arguments[1]));
+            return addTodo;
+        case "Deadline":
+            Deadline addDeadline = new Deadline(arguments[2], arguments[3]);
+            setTaskDoneWhenLoading(addDeadline, Boolean.parseBoolean(arguments[1]));
+            return addDeadline;
+        case "Event":
+            Event addEvent = new Event(arguments[2], arguments[3], arguments[4]);
+            setTaskDoneWhenLoading(addEvent, Boolean.parseBoolean(arguments[1]));
+            return addEvent;
         }
         return null;
     }
 
     public String toSave() {
         return "Invalid";
+    }
+
+    private static void setTaskDoneWhenLoading(Task task, boolean isDone) {
+        if (isDone) {
+            task.setDone();
+        }
     }
 }

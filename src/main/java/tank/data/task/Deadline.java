@@ -20,6 +20,6 @@ public class Deadline extends Task {
     }
 
     public String toSave() {
-        return type + " " + isDone + " " + super.description + " " + by + " " + "pad";
+        return type + " | " + isDone + " | " + super.description + " | " + by + " | " + "pad";
     }
 }

@@ -76,7 +76,7 @@ public class TextUi {
 
     public void printWelcomeMessage() {
         printDottedLines();
-        out.println("Hello! I'm Tank");
+        out.println("Hello! I'm Tank!");
         out.println("I'm here to help track your tasks, what shall we talk about today?");
         printDottedLines();
     }

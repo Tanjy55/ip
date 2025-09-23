@@ -8,10 +8,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.BufferedWriter;
 import java.io.IOException;
-import java.nio.file.Path;
 import java.util.ArrayList;
 
-import tank.data.task.Task;
 
 public class TankStoreFile {
     public final String storagePath = "./data/storage.txt";
@@ -33,7 +31,7 @@ public class TankStoreFile {
         try (BufferedReader reader = new BufferedReader(new FileReader(storagePath))) {
             String readInput;
             while ((readInput = reader.readLine()) != null) {
-                String[] parts = readInput.split(" ", 4);
+                String[] parts = readInput.split("\\s*\\|\\s*", 5);
                 list.add(Task.fromString(parts[0], parts));
             }
         } catch (Exception e) {

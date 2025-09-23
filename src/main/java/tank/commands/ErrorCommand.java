@@ -1,5 +1,7 @@
 package tank.commands;
 
+import tank.data.TaskList;
+
 public class ErrorCommand extends Command {
     private final String errorMessage;
 
@@ -8,7 +10,7 @@ public class ErrorCommand extends Command {
     }
 
     @Override
-    public CommandResult execute() {
+    public CommandResult execute(TaskList taskList) {
         return new CommandResult(errorMessage);
     }
 }

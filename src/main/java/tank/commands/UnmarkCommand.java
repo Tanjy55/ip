@@ -1,20 +1,18 @@
 package tank.commands;
 
-import tank.storage.TankStoreFile;
+import tank.data.TaskList;
 
 public class UnmarkCommand extends Command{
     int arrayIndex;
-    TankStoreFile store = new TankStoreFile();
 
     public UnmarkCommand(int arrayIndex) {
         this.arrayIndex = arrayIndex;
     }
 
     @Override
-    public CommandResult execute() {
+    public CommandResult execute(TaskList taskList) {
         try {
-            tasklist.setTaskNotDone(arrayIndex);
-            store.save(tasklist.getAllTasks());
+            taskList.setTaskNotDone(arrayIndex);
             return new CommandResult("Unmark successful");
         } catch (IndexOutOfBoundsException e) {
             return new CommandResult("Invalid Index");

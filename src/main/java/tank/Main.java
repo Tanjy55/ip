@@ -7,7 +7,6 @@ import tank.parser.Parser;
 import tank.storage.TankStoreFile;
 import tank.ui.TextUi;
 import tank.data.TaskList;
-import tank.storage.TankStoreFile;
 
 public class Main {
     private TextUi ui;
@@ -19,19 +18,19 @@ public class Main {
     }
 
     public void run(String[] launchArgs) {
-        start(launchArgs);
+        start();
         runCommandLoopUntilExitCommand();
         exit();
     }
 
-    private void start(String[] launchArgs) {
+    private void start() {
         try {
             this.ui = new TextUi();
             this.tasklist = new TaskList();
             this.storage = new TankStoreFile();
             storage.load(tasklist.getAllTasks());
             ui.printWelcomeMessage();
-        } catch (Exception ex) {
+        } catch (Exception e) {
             ui.printInvalidInput();
         }
     }
@@ -54,8 +53,7 @@ public class Main {
 
     private CommandResult executeCommand(Command command) {
         try {
-            command.setData(tasklist);
-            CommandResult result = command.execute();
+            CommandResult result = command.execute(tasklist);
             return result;
         } catch (Exception e) {
             return new CommandResult("Error " + e.getMessage());

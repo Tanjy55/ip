@@ -1,20 +1,18 @@
 package tank.commands;
 
-import tank.storage.TankStoreFile;
+import tank.data.TaskList;
 
 public class MarkCommand extends Command {
     int arrayIndex;
-    TankStoreFile store = new TankStoreFile();
 
     public MarkCommand(int arrayIndex) {
         this.arrayIndex = arrayIndex;
     }
 
     @Override
-    public CommandResult execute() {
+    public CommandResult execute(TaskList taskList) {
         try {
-            tasklist.setTaskDone(arrayIndex);
-            store.save(tasklist.getAllTasks());
+            taskList.setTaskDone(arrayIndex);
             return new CommandResult("Mark successful");
         } catch (IndexOutOfBoundsException e) {
             return new CommandResult("Invalid Number given!");

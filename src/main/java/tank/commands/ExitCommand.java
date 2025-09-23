@@ -1,8 +1,10 @@
 package tank.commands;
 
+import tank.data.TaskList;
+
 public class ExitCommand extends Command {
     @Override
-    public CommandResult execute() {
+    public CommandResult execute(TaskList taskList) {
         return new CommandResult("Exiting Tank");
     }
 
