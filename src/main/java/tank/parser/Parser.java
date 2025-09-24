@@ -5,6 +5,7 @@ import tank.commands.Command;
 import tank.commands.DeleteCommand;
 import tank.commands.ErrorCommand;
 import tank.commands.ExitCommand;
+import tank.commands.FindCommand;
 import tank.commands.HelpCommand;
 import tank.commands.ListCommand;
 import tank.commands.MarkCommand;
@@ -61,6 +62,9 @@ public class Parser {
 
         case "unmark":
             return prepareUnmark(arguments);
+
+        case "find":
+            return prepareFind(arguments);
 
         default:
             return new HelpCommand();
@@ -136,6 +140,15 @@ public class Parser {
             return new UnmarkCommand(arrayIndex);
         } catch (NumberFormatException e) {
             return new ErrorCommand("Input given should be a number!");
+        }
+    }
+
+    private Command prepareFind(String arguments) {
+        try {
+            String keyWord = arguments.trim();
+            return new FindCommand(keyWord);
+        } catch (Exception e) {
+            return new ErrorCommand("Unable to find keyword!");
         }
     }
 

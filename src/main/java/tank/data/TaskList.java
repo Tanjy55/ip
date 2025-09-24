@@ -31,4 +31,8 @@ public class TaskList {
     public void setTaskNotDone(int toSet) {
         allTasks.setNotDone(toSet);
     }
+
+    public int getLatestIndex() {
+        return allTasks.getTasks().size() - 1;
+    }
 }

@@ -34,17 +34,13 @@ public class TextUi {
         System.out.print(DOTTED_LINES);
     }
 
-    public void printTaskMessage(ArrayList<Task> list, int index) {
+    public void printTask(ArrayList<Task> list, int index) {
         out.println("\t" + list.get(index));
-    }
-
-    public void printTaskMessage(ArrayList<Task> list, String message, int index) {
-        out.println("\t" + message);
-        out.println("\t\t" + list.get(index));
     }
 
     public void printNumberOfTasks(ArrayList<Task> list) {
         out.println(" Now you have " + list.size() + " tasks in the list.");
+        printDottedLines();
     }
 
     public void displayList(ArrayList<Task> list) {

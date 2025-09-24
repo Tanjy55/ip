@@ -13,6 +13,7 @@ public class Messages {
             5) "todo", add the description afterwards to add this to the list
             6) "deadline", add "\\by" followed by the date to add this to the list
             7) "event", add "\\from" then date and "\\to" then date
-            8) "bye" to finish the chat
+            8) "find", then type in the keyword to search
+            9) "bye" to finish the chat
             """;
 }

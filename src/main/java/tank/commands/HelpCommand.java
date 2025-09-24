@@ -1,14 +1,19 @@
 package tank.commands;
 
 import tank.data.TaskList;
-
-import static tank.common.Messages.HELP_SHEET;
-import static tank.common.Messages.INVALID_INPUT;
+import tank.ui.TextUi;
 
 
 public class HelpCommand extends Command {
+    private TextUi ui;
+
+    public HelpCommand() {
+        this.ui = new TextUi();
+    }
+
     @Override
     public CommandResult execute(TaskList taskList) {
-        return new CommandResult(INVALID_INPUT + "\n" + HELP_SHEET);
+        ui.printHelp();
+        return new CommandResult("Error averted successfully");
     }
 }
