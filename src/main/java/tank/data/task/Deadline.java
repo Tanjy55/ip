@@ -1,11 +1,13 @@
 package tank.data.task;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
 
-    protected String by;
+    protected LocalDateTime by;
     protected String type = "Deadline";
 
-    public Deadline(String description, String by) {
+    public Deadline(String description, LocalDateTime by) {
         super(description);
         this.by = by;
     }
@@ -15,11 +17,19 @@ public class Deadline extends Task {
         return "[D]"
                 + super.toString()
                 + " (by: "
-                + by
+                + by.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))
                 + ")";
     }
 
     public String toSave() {
-        return type + " | " + isDone + " | " + super.description + " | " + by + " | " + "pad";
+        return type
+                + " | "
+                + isDone
+                + " | "
+                + super.description
+                + " | "
+                + by.toString()
+                + " | "
+                + "pad";
     }
 }

@@ -1,12 +1,14 @@
 package tank.data.task;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
 
-    protected String from;
-    protected String to;
+    protected LocalDateTime from;
+    protected LocalDateTime to;
     protected String type = "Event";
 
-    public Event(String description, String from, String to) {
+    public Event(String description, LocalDateTime from, LocalDateTime to) {
         super(description);
         this.from = from;
         this.to = to;
@@ -17,12 +19,21 @@ public class Event extends Task {
         return "[E]"
                 + super.toString()
                 + " (from: "
-                + from
+                + from.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))
                 + ", to: "
-                + to + ")";
+                + to.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))
+                + ")";
     }
 
     public String toSave() {
-        return type + " | "  + isDone + " | " + super.description + " | " + from + " | " + to;
+        return type
+                + " | "
+                + isDone
+                + " | "
+                + super.description
+                + " | "
+                + from.toString()
+                + " | "
+                + to.toString();
     }
 }

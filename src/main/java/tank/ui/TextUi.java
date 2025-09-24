@@ -58,7 +58,7 @@ public class TextUi {
     }
 
     public void printHelp() {
-        out.print(HELP_SHEET);
+        out.print(INVALID_INPUT + HELP_SHEET);
     }
 
     public void printCommandResult(CommandResult commandResult) {

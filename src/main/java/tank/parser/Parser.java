@@ -16,6 +16,9 @@ import tank.data.task.Deadline;
 import tank.data.task.Event;
 import tank.data.task.Task;
 import tank.data.task.Todo;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 
 public class Parser {
@@ -94,7 +97,18 @@ public class Parser {
         }
 
         String[] deadlineInput = processDeadlineInput(arguments);
-        Task toAdd = new Deadline(deadlineInput[0], deadlineInput[1]);
+        String description = deadlineInput[0];
+        String by = deadlineInput[1];
+        LocalDateTime localDateTime;
+
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("d/M/uuuu HHmm");
+        try {
+             localDateTime = LocalDateTime.parse(by.trim(), fmt);
+        } catch (DateTimeParseException e) {
+            return new ErrorCommand("Please give date and time the format: DD/MM/YYYY HHMM");
+        }
+
+        Task toAdd = new Deadline(description, localDateTime);
         return new AddCommand(toAdd);
     }
 
@@ -109,7 +123,21 @@ public class Parser {
         }
 
         String[] eventInput = processEventInput(arguments);
-        Task toAdd = new Event(eventInput[0], eventInput[1], eventInput[2]);
+        String description = eventInput[0];
+        String from = eventInput[1];
+        String to = eventInput[2];
+        LocalDateTime localDateTimeFrom;
+        LocalDateTime localDateTimeTo;
+
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("d/M/uuuu HHmm");
+        try {
+            localDateTimeFrom = LocalDateTime.parse(from.trim(), fmt);
+            localDateTimeTo = LocalDateTime.parse(to.trim(), fmt);
+        } catch (DateTimeParseException e) {
+            return new ErrorCommand("Please give date and time the format: DD/MM/YYYY HHMM");
+        }
+
+        Task toAdd = new Event(description, localDateTimeFrom, localDateTimeTo);
         return new AddCommand(toAdd);
     }
 

@@ -1,5 +1,7 @@
 package tank.data.task;
 
+import java.time.LocalDateTime;
+
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -34,15 +36,21 @@ public class Task {
         switch (type) {
         case "Todo":
             Todo addTodo = new Todo(arguments[2]);
-            setTaskDoneWhenLoading(addTodo, Boolean.parseBoolean(arguments[1]));
+            setTaskDoneWhenLoading(addTodo,
+                    Boolean.parseBoolean(arguments[1]));
             return addTodo;
         case "Deadline":
-            Deadline addDeadline = new Deadline(arguments[2], arguments[3]);
-            setTaskDoneWhenLoading(addDeadline, Boolean.parseBoolean(arguments[1]));
+            Deadline addDeadline = new Deadline(arguments[2],
+                    LocalDateTime.parse(arguments[3]));
+            setTaskDoneWhenLoading(addDeadline,
+                    Boolean.parseBoolean(arguments[1]));
             return addDeadline;
         case "Event":
-            Event addEvent = new Event(arguments[2], arguments[3], arguments[4]);
-            setTaskDoneWhenLoading(addEvent, Boolean.parseBoolean(arguments[1]));
+            Event addEvent = new Event(arguments[2],
+                    LocalDateTime.parse(arguments[3]),
+                    LocalDateTime.parse(arguments[4]));
+            setTaskDoneWhenLoading(addEvent,
+                    Boolean.parseBoolean(arguments[1]));
             return addEvent;
         }
         return null;
