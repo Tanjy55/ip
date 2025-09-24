@@ -8,6 +8,7 @@ public class ListCommand extends Command{
 
     @Override
     public CommandResult execute(TaskList taskList) {
+        ui.printMessage("Here are the tasks in the list");
         ui.displayList(taskList.getAllTasks());
         return new CommandResult("Displayed list successfully");
     }

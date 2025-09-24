@@ -14,6 +14,6 @@ public class HelpCommand extends Command {
     @Override
     public CommandResult execute(TaskList taskList) {
         ui.printHelp();
-        return new CommandResult("Error averted successfully");
+        return new CommandResult("Displayed help message above");
     }
 }

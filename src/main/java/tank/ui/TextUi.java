@@ -40,21 +40,22 @@ public class TextUi {
 
     public void printNumberOfTasks(ArrayList<Task> list) {
         out.println(" Now you have " + list.size() + " tasks in the list.");
-        printDottedLines();
     }
 
     public void displayList(ArrayList<Task> list) {
         int taskCounter = 1;
-        out.println("\tHere are the tasks in your list:");
         for (Task item : list) {
             out.println("\t" + taskCounter + "." + item);
             taskCounter++;
         }
-        printDottedLines();
     }
 
     public void printInvalidInput() {
         out.print(INVALID_INPUT);
+    }
+
+    public void printNewLine() {
+        out.println();
     }
 
     public void printHelp() {
@@ -62,6 +63,7 @@ public class TextUi {
     }
 
     public void printCommandResult(CommandResult commandResult) {
+        printDottedLines();
         out.println("\t" + commandResult.feedbackToUser);
         printDottedLines();
     }

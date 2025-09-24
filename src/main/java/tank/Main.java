@@ -45,6 +45,7 @@ public class Main {
         do {
             String userCommandText = ui.getUserCommand();
             command = new Parser().parseCommand(userCommandText);
+            ui.printNewLine();
             CommandResult result = executeCommand(command);
             ui.printCommandResult(result);
             storage.save(tasklist.getAllTasks());
