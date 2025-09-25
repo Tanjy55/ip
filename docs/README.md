@@ -1,30 +1,132 @@
-# Duke User Guide
+# Tank User Guide
 
-// Update the title above to match the actual product name
+![img.png](img.png)
 
-// Product screenshot goes here
+Tank is a CLI-based desktop app for managing your tasks.
+You can create three types of tasks: Todo, Deadline, and Event.
+Tasks can be viewed at any time, marked as done or undone, and even searched easily.
+All data is stored locally and automatically saved, then reloaded when you start the app again.
 
-// Product intro goes here
-
-## Adding deadlines
-
-// Describe the action and its outcome.
-
-// Give examples of usage
-
-Example: `keyword (optional arguments)`
-
-// A description of the expected outcome goes here
-
-```
-expected output
-```
-
-## Feature ABC
-
-// Feature details
+Enjoy!
 
 
-## Feature XYZ
+## Quick start
+Ensure you have Java 17 or above installed in your Computer.
+Mac users: Ensure you have the precise JDK version prescribed <link>.
 
-// Feature details
+Download the latest .jar file from <link>.
+
+Copy the file to the folder you want to use as the home folder for running Tank.
+
+Open a command terminal, cd into the folder you put the jar file in, and use the java -jar Tank.jar command to run the application.
+
+
+
+## Adding Todo
+
+Adds a todo task to the list. Command word Todo is not case-sensitive.
+
+Format: todo <description>
+
+Examples: 
+- `Todo water plants`
+- `Todo Clean the windows`
+
+Expected output example:
+![img_1.png](img_1.png)
+
+
+## Adding Deadlines
+
+Adds a deadline task to the list. Command word Deadline is not case-sensitive.
+
+Format: deadline <description> /by <DD/MM/YYYY HHMM>
+
+Examples:
+- `deadline submit assignment /by 05/06/2023 2359`
+- `deadline quiz /by 15/12/2024 1100`
+
+Expected output example:
+![img_2.png](img_2.png)
+
+
+## Adding Events
+
+Adds a todo task to the list. Command word event is not case-sensitive.
+
+Format: event <description> /from <DD/MM/YYYY HHMM> /to <DD/MM/YYYY HHMM>
+
+Examples:
+- `event computer fair /from 07/08/2024 0800 /to 10/08/2024 1800`
+- `event concert /from 01/01/2025 1900 /to 01/01/2025 0000`
+
+Expected output example:
+![img_3.png](img_3.png)
+
+
+## Viewing all tasks
+
+View all tasks added sequentially. Command word list is not case-sensitive.
+
+Format: list
+
+Example and expected output:
+![img_4.png](img_4.png)
+
+
+## Marking tasks as 'done'
+
+Simply marks task as done. Command word Mark is not case-sensitive.
+Then, use list command to view updated list.
+
+Format: Mark <number shown in list>
+
+Example:
+- `mark 1`
+- `mark 3`
+
+Expected output:
+![img_8.png](img_8.png)
+
+
+## Marking tasks as 'not done'
+
+Simply marks task as not done. Command word Unmark is not case-sensitive.
+
+Format: Unmark <number shown in list>
+
+Example:
+- `unmark 1`
+- `unmark 3`
+
+Expected output:
+![img_9.png](img_9.png)
+
+
+## Searching for tasks using keyword
+
+Finds all tasks whose description contains the keyword. 
+Both command word find, and keyword are not case-sensitive.
+
+Example:
+- `find quiz`
+- `find window`
+
+Expected output:
+![img_10.png](img_10.png)
+
+
+## Help!
+
+Should you need a quick reminder, simply type in any random word.
+
+Example and expected output:
+![img_11.png](img_11.png)
+
+
+## Exiting 
+
+Say "bye" to exit. The command word bye is not case-sensitive.
+
+Example and expected output:
+![img_12.png](img_12.png)

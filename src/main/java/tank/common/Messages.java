@@ -18,6 +18,6 @@ public class Messages {
             8) "find", then type in the keyword to search
             9) "bye" to finish the chat
             
-            Or, see the userguide @ <link> !
+            Or, see the userguide @ https://tanjy55.github.io/ip/ !
             """;
 }
