@@ -2,6 +2,9 @@ package tank.commands;
 
 import tank.data.TaskList;
 
+/**
+ * Sets user specified Task as done
+ */
 public class MarkCommand extends Command {
     int arrayIndex;
 
@@ -9,6 +12,12 @@ public class MarkCommand extends Command {
         this.arrayIndex = arrayIndex;
     }
 
+    /**
+     * Set isDone attribute in Task to True
+     *
+     * @param taskList TaskList to mutate
+     * @return CommandResult message of result
+     */
     @Override
     public CommandResult execute(TaskList taskList) {
         try {

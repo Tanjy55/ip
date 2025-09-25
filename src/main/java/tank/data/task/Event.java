@@ -1,7 +1,11 @@
 package tank.data.task;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Event subtype of Task
+ */
 public class Event extends Task {
 
     protected LocalDateTime from;
@@ -14,6 +18,11 @@ public class Event extends Task {
         this.to = to;
     }
 
+    /**
+     * Convert attributes of event into sequence of Strings
+     *
+     * @return String containing type, description, from and to
+     */
     @Override
     public String toString() {
         return "[E]"
@@ -25,6 +34,12 @@ public class Event extends Task {
                 + ")";
     }
 
+    /**
+     * Used in conjunction with save method in TankStoreFile
+     * Specific to Event type
+     *
+     * @return string formatted specifically for storage
+     */
     public String toSave() {
         return type
                 + " | "

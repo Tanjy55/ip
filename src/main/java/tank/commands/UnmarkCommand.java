@@ -2,13 +2,22 @@ package tank.commands;
 
 import tank.data.TaskList;
 
-public class UnmarkCommand extends Command{
+/**
+ * Sets user specified Task as not done
+ */
+public class UnmarkCommand extends Command {
     int arrayIndex;
 
     public UnmarkCommand(int arrayIndex) {
         this.arrayIndex = arrayIndex;
     }
 
+    /**
+     * Set isDone attribute in Task to False
+     *
+     * @param taskList TaskList to mutate
+     * @return CommandResult message of result
+     */
     @Override
     public CommandResult execute(TaskList taskList) {
         try {

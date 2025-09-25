@@ -12,6 +12,9 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Text UI of the application
+ */
 public class TextUi {
 
     private final Scanner in;
@@ -34,14 +37,33 @@ public class TextUi {
         System.out.print(DOTTED_LINES);
     }
 
+
+    /**
+     * Calls toString method for given Task in Arraylist
+     *
+     * @param list  ArrayList data reference
+     * @param index index of item in list
+     */
     public void printTask(ArrayList<Task> list, int index) {
         out.println("\t" + list.get(index));
     }
 
+    /**
+     * Prints number of tasks in ArrayList
+     *
+     * @param list ArrayList data reference
+     */
     public void printNumberOfTasks(ArrayList<Task> list) {
-        out.println(" Now you have " + list.size() + " tasks in the list.");
+        out.println(" Now you have "
+                + list.size()
+                + " tasks in the list.");
     }
 
+    /**
+     * Prints all Task sequentially in Arraylist
+     *
+     * @param list ArrayList data reference
+     */
     public void displayList(ArrayList<Task> list) {
         int taskCounter = 1;
         for (Task item : list) {
@@ -62,6 +84,11 @@ public class TextUi {
         out.print(INVALID_INPUT + HELP_SHEET);
     }
 
+    /**
+     * Prints message stored in CommandResult
+     *
+     * @param commandResult object reference
+     */
     public void printCommandResult(CommandResult commandResult) {
         printDottedLines();
         out.println("\t" + commandResult.feedbackToUser);
@@ -75,7 +102,8 @@ public class TextUi {
     public void printWelcomeMessage() {
         printDottedLines();
         out.println("Hello! I'm Tank!");
-        out.println("I'm here to help track your tasks, what shall we talk about today?");
+        out.println("I'm here to help track your tasks,"
+                + "what shall we talk about today?");
         printDottedLines();
     }
 

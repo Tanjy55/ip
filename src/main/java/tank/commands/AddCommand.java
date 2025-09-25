@@ -4,6 +4,9 @@ import tank.data.TaskList;
 import tank.data.task.Task;
 import tank.ui.TextUi;
 
+/**
+ * Adds a Task to TaskList
+ */
 public class AddCommand extends Command {
     private final Task toAdd;
     private TextUi ui;
@@ -13,6 +16,12 @@ public class AddCommand extends Command {
         this.ui = new TextUi();
     }
 
+    /**
+     * Add a task and prints result using ui.
+     *
+     * @param taskList TaskList to add to
+     * @return CommandResult with success message
+     */
     @Override
     public CommandResult execute(TaskList taskList) {
         taskList.addTask(toAdd);

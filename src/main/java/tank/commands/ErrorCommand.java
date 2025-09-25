@@ -2,6 +2,9 @@ package tank.commands;
 
 import tank.data.TaskList;
 
+/**
+ * Used for prompting user when invalid commands are given
+ */
 public class ErrorCommand extends Command {
     private final String errorMessage;
 

@@ -16,27 +16,34 @@ import tank.data.task.Deadline;
 import tank.data.task.Event;
 import tank.data.task.Task;
 import tank.data.task.Todo;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-
+/**
+ * Parses all user input and returns new command
+ */
 public class Parser {
+
+    /**
+     * Main method for parsing user input
+     *
+     * @param line user input string
+     * @return new Command instance for main to call execute
+     */
     public Command parseCommand(String line) {
 
-        //split the string into command and argument
         String[] parts = line.split("\\s+", 2);
         String command = parts[0].toLowerCase();
         String arguments;
 
-        //special case for no argument command "list"
         if (command.equals("list")) {
             return new ListCommand();
         } else if (command.equals("bye")) {
             return new ExitCommand();
         }
 
-        //check if command is missing argument
         try {
             checkArgumentsExist(parts);
         } catch (TankCommandInvalidException e) {
@@ -44,7 +51,6 @@ public class Parser {
         }
 
         arguments = parts[1].trim();
-
 
         switch (command) {
 
@@ -74,7 +80,13 @@ public class Parser {
         }
     }
 
-
+    /**
+     * Prepares for Todo addition to ArrayList
+     * Unless exception is caught due to invalid input
+     *
+     * @param arguments contains description for Todo object
+     * @return new addCommand with reference to new Todo object
+     */
     private Command prepareTodo(String arguments) {
         try {
             checkIfStringEmpty(arguments);
@@ -86,7 +98,14 @@ public class Parser {
         return new AddCommand(toAdd);
     }
 
-
+    /**
+     * Prepares for Deadline addition to ArrayList
+     * Unless exception is caught due to invalid input
+     * Parses by into a LocalDateTime object
+     *
+     * @param arguments contains description and by for Deadline object
+     * @return new addCommand with reference to new Deadline object
+     */
     private Command prepareDeadline(String arguments) {
         try {
             checkValidDeadline(arguments);
@@ -103,16 +122,24 @@ public class Parser {
 
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("d/M/uuuu HHmm");
         try {
-             localDateTime = LocalDateTime.parse(by.trim(), fmt);
+            localDateTime = LocalDateTime.parse(by.trim(), fmt);
         } catch (DateTimeParseException e) {
-            return new ErrorCommand("Please give date and time the format: DD/MM/YYYY HHMM");
+            return new ErrorCommand(
+                    "Please give date and time the format: DD/MM/YYYY HHMM");
         }
 
         Task toAdd = new Deadline(description, localDateTime);
         return new AddCommand(toAdd);
     }
 
-
+    /**
+     * Prepares for Event addition to ArrayList
+     * Unless exception is caught due to invalid input
+     * Parses from and to into a LocalDateTime object
+     *
+     * @param arguments contains description, from and to for Event object
+     * @return new addCommand with reference to new Event object
+     */
     private Command prepareEvent(String arguments) {
         try {
             checkValidEvent(arguments);
@@ -134,14 +161,20 @@ public class Parser {
             localDateTimeFrom = LocalDateTime.parse(from.trim(), fmt);
             localDateTimeTo = LocalDateTime.parse(to.trim(), fmt);
         } catch (DateTimeParseException e) {
-            return new ErrorCommand("Please give date and time the format: DD/MM/YYYY HHMM");
+            return new ErrorCommand(
+                    "Please give date and time the format: DD/MM/YYYY HHMM");
         }
 
         Task toAdd = new Event(description, localDateTimeFrom, localDateTimeTo);
         return new AddCommand(toAdd);
     }
 
-
+    /**
+     * Prepare Task for deletion
+     *
+     * @param arguments number in list to be deleted given by user
+     * @return command to delete with the parsed ArrayList index
+     */
     private Command prepareDelete(String arguments) {
         try {
             int arrayIndex = Integer.parseInt(arguments) - 1;
@@ -151,7 +184,12 @@ public class Parser {
         }
     }
 
-
+    /**
+     * Prepare Task to be marked as done
+     *
+     * @param arguments number in list to be marked given by user
+     * @return command to mark Task as done
+     */
     private Command prepareMark(String arguments) {
         try {
             int arrayIndex = Integer.parseInt(arguments) - 1;
@@ -161,7 +199,12 @@ public class Parser {
         }
     }
 
-
+    /**
+     * Prepare Task to be marked as not done
+     *
+     * @param arguments number in list to be unmarked given by user
+     * @return command to mark Task as not done
+     */
     private Command prepareUnmark(String arguments) {
         try {
             int arrayIndex = Integer.parseInt(arguments) - 1;
@@ -171,6 +214,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Prepare to search in ArrayList for keyword
+     *
+     * @param arguments keyword to search for given by user
+     * @return command to search ArrayList for Tasks that contains keyword
+     */
     private Command prepareFind(String arguments) {
         try {
             String keyWord = arguments.trim();
@@ -181,27 +230,40 @@ public class Parser {
     }
 
 
-    static void checkArgumentsExist(String[] parts) throws TankCommandInvalidException {
+    static void checkArgumentsExist(String[] parts)
+            throws TankCommandInvalidException {
         if (parts.length == 1) {
-            throw new TankCommandInvalidException("Incomplete command arguments, please see the help sheet!");
+            throw new TankCommandInvalidException(
+                    "Incomplete command arguments, please see the help sheet!");
         }
     }
 
 
-    static void checkIfStringEmpty(String string) throws TankArgumentMissingException {
+    static void checkIfStringEmpty(String string)
+            throws TankArgumentMissingException {
+
         if (string.isEmpty()) {
-            throw new TankArgumentMissingException("Invalid input, some information is missing!");
+            throw new TankArgumentMissingException(
+                    "Invalid input, some information is missing!");
         }
     }
 
 
-    static void checkIfStringContains(String string, String string2) throws TankCommandInvalidException {
+    static void checkIfStringContains(String string, String string2)
+            throws TankCommandInvalidException {
+
         if (!string.contains(string2)) {
-            throw new TankCommandInvalidException("Hmmm something went wrong, check if you forgot to include: ");
+            throw new TankCommandInvalidException(
+                    "Hmmm something went wrong, check if you forgot to include: ");
         }
     }
 
-
+    /**
+     * Parses user input for Deadline addition
+     *
+     * @param arguments user input without command word
+     * @return array of string containing description and by
+     */
     static String[] processDeadlineInput(String arguments) {
         String[] message = arguments.split("/by", 2);
         message[0] = message[0].trim();
@@ -209,7 +271,12 @@ public class Parser {
         return message;
     }
 
-
+    /**
+     * Parses user input for Event addition
+     *
+     * @param arguments user input without command word
+     * @return array of string containing description, from and to
+     */
     static String[] processEventInput(String arguments) {
         String[] returnArray = new String[3];
         String[] message = arguments.split("/from", 2);
@@ -221,8 +288,16 @@ public class Parser {
         return returnArray;
     }
 
-
-    static void checkValidDeadline(String arguments) throws TankCommandInvalidException, TankArgumentMissingException {
+    /**
+     * Checks if all Deadline attributes are valid and contains the correct command word
+     * Throw exceptions if invalid or missing field detected
+     *
+     * @param arguments user input without command word
+     * @throws TankCommandInvalidException  if deadline fields do not contain required keyword
+     * @throws TankArgumentMissingException if deadline fields are missing argument information
+     */
+    static void checkValidDeadline(String arguments)
+            throws TankCommandInvalidException, TankArgumentMissingException {
 
         checkIfStringEmpty(arguments);
         checkIfStringContains(arguments, "/by");
@@ -235,8 +310,16 @@ public class Parser {
         checkIfStringEmpty(byDate);
     }
 
-
-    static void checkValidEvent(String arguments) throws TankCommandInvalidException, TankArgumentMissingException {
+    /**
+     * Checks if all Event attributes are valid and contains the correct command words
+     * Throw exceptions if invalid or missing field detected
+     *
+     * @param arguments user input without command word
+     * @throws TankCommandInvalidException  if event fields missing required keyword
+     * @throws TankArgumentMissingException if event fields missing argument information
+     */
+    static void checkValidEvent(String arguments)
+            throws TankCommandInvalidException, TankArgumentMissingException {
 
         checkIfStringEmpty(arguments);
         checkIfStringContains(arguments, "/from");

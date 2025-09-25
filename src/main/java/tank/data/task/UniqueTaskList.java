@@ -2,23 +2,28 @@ package tank.data.task;
 
 import java.util.ArrayList;
 
+/**
+ * A list of tasks, implemented using ArrayList
+ */
 public class UniqueTaskList {
     private final ArrayList<Task> tasks = new ArrayList<>();
 
-    //construct empty task list
-    public UniqueTaskList() {}
+    public UniqueTaskList() {
+    }
 
-    //add
     public void add(Task toAdd) {
         tasks.add(toAdd);
     }
 
-    //remove
     public void remove(int toRemove) {
         tasks.remove(toRemove);
     }
 
-    //return arraylist of all tasks
+    /**
+     * Returns an arrayList of Tasks
+     *
+     * @return arrayList
+     */
     public ArrayList<Task> getTasks() {
         return tasks;
     }

@@ -6,6 +6,10 @@ import tank.ui.TextUi;
 
 import java.util.ArrayList;
 
+/**
+ * Find and list Tasks whose description contains argument keywords
+ * Keyword matching is case-sensitive
+ */
 public class FindCommand extends Command {
     private String keyWord;
     private TextUi ui;
@@ -15,6 +19,13 @@ public class FindCommand extends Command {
         this.ui = new TextUi();
     }
 
+    /**
+     * Iterates through TaskList
+     * Print all Tasks which description contains keywords
+     *
+     * @param taskList TaskList to search from
+     * @return CommandResult with message of search result
+     */
     @Override
     public CommandResult execute(TaskList taskList) {
         ArrayList<Task> foundTasks = new ArrayList<>();

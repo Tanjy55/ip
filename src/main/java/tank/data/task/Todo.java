@@ -1,5 +1,8 @@
 package tank.data.task;
 
+/**
+ * Represents a Todo Task in the list of Tasks
+ */
 public class Todo extends Task {
 
     public Todo(String description) {
@@ -13,7 +16,20 @@ public class Todo extends Task {
         return "[T]" + super.toString();
     }
 
+    /**
+     * Processes Tdo attributes into format for .txt storage
+     *
+     * @return a string for .txt storage
+     */
     public String toSave() {
-        return type + " | " + isDone + " | " + super.description + " | " + "pad" + " | " + "pad";
+        return type
+                + " | "
+                + isDone
+                + " | "
+                + super.description
+                + " | "
+                + "pad"
+                + " | "
+                + "pad";
     }
 }

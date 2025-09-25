@@ -5,6 +5,9 @@ import tank.data.task.UniqueTaskList;
 
 import java.util.ArrayList;
 
+/**
+ * Contains getters and setters for all tasks
+ */
 public class TaskList {
     private final UniqueTaskList allTasks;
 
@@ -20,6 +23,11 @@ public class TaskList {
         allTasks.remove(toRemove);
     }
 
+    /**
+     * Fetch the arrayList
+     *
+     * @return the ArrayList data
+     */
     public ArrayList<Task> getAllTasks() {
         return allTasks.getTasks();
     }
@@ -32,6 +40,11 @@ public class TaskList {
         allTasks.setNotDone(toSet);
     }
 
+    /**
+     * Fetch the array index of the Task added most recently to allTasks
+     *
+     * @return is an integer representing the index
+     */
     public int getLatestIndex() {
         return allTasks.getTasks().size() - 1;
     }

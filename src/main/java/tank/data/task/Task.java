@@ -2,12 +2,14 @@ package tank.data.task;
 
 import java.time.LocalDateTime;
 
+/**
+ * Parent class of Todo, Deadline, Event
+ */
 public class Task {
     protected String description;
     protected boolean isDone;
-    protected String type;
 
-    public Task(String description) {
+    protected Task(String description) {
         this.description = description;
         this.isDone = false;
     }
@@ -20,8 +22,13 @@ public class Task {
         isDone = false;
     }
 
+    /**
+     * Checks done status and return a string
+     *
+     * @return a string that represents the state of Task, if finished or not
+     */
     public String getStatusIcon() {
-        return (isDone ? "[X]" : "[ ]"); // mark done task with X
+        return (isDone ? "[X]" : "[ ]");
     }
 
     public String getDescription() {
@@ -32,6 +39,14 @@ public class Task {
         return getStatusIcon() + " " + description;
     }
 
+    /**
+     * Used in conjunction with load method in TankStoreFile
+     * Convert String in .txt to Todo, Deadline or Event
+     *
+     * @param type      represents the type of Task to be created
+     * @param arguments attributes of Task type
+     * @return new instance of Task type
+     */
     public static Task fromString(String type, String[] arguments) {
         switch (type) {
         case "Todo":
@@ -56,13 +71,26 @@ public class Task {
         return null;
     }
 
-    public String toSave() {
-        return "Invalid";
-    }
-
+    /**
+     * To be used in conjunction with load method in TankStoreFile
+     * Set the boolean isDone based on setting from .txt
+     *
+     * @param task   reference to Task object
+     * @param isDone done status from storage
+     */
     private static void setTaskDoneWhenLoading(Task task, boolean isDone) {
         if (isDone) {
             task.setDone();
         }
+    }
+
+    /**
+     * To be overridden by subclasses
+     * Used in conjunction with save method in TankStoreFile
+     *
+     * @return invalid as method in task is not intended to be called
+     */
+    public String toSave() {
+        return "Invalid";
     }
 }
