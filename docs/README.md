@@ -13,7 +13,7 @@ Enjoy!
 ## Quick start
 1) Ensure you have Java 17 or above installed in your Computer.
 
-2) Download the latest .jar file from [here](https://tanjy55.github.io/ip/).
+2) Download the latest .jar file from [here](https://github.com/Tanjy55/ip/releases/tag/Level-9).
 
 3) Copy the file to the folder you want to use as the home folder for running Tank.
 
@@ -34,7 +34,7 @@ Adds a todo task to the list. Command word Todo is not case-sensitive.
 Format: todo <description>
 
 Examples: 
-> Todo water plants 
+> Todo water plants <br/>
 > Todo Clean the windows
 
 Expected output example:
@@ -48,7 +48,7 @@ Adds a deadline task to the list. Command word Deadline is not case-sensitive.
 Format: deadline <description> /by <DD/MM/YYYY HHMM>
 
 Examples:
-> deadline submit assignment /by 05/06/2023 2359
+> deadline submit assignment /by 05/06/2023 2359 <br/>
 > deadline quiz /by 15/12/2024 1100
 
 Expected output example:
@@ -62,7 +62,7 @@ Adds a todo task to the list. Command word event is not case-sensitive.
 Format: event <description> /from <DD/MM/YYYY HHMM> /to <DD/MM/YYYY HHMM>
 
 Examples:
-> event computer fair /from 07/08/2024 0800 /to 10/08/2024 1800
+> event computer fair /from 07/08/2024 0800 /to 10/08/2024 1800 <br/>
 > event concert /from 01/01/2025 1900 /to 01/01/2025 0000
 
 Expected output example:
@@ -86,7 +86,7 @@ Removes a task from the list. Command word delete is not case-sensitive.
 Format: Delete <number shown in list>
 
 Example:
-> delete 1
+> delete 1 <br/>
 > delete 3
 
 Expected output:
@@ -101,7 +101,7 @@ Then, use list command to view updated list.
 Format: Mark <number shown in list>
 
 Example:
-> mark 1
+> mark 1 <br/>
 > mark 3
 
 Expected output:
@@ -115,7 +115,7 @@ Simply marks task as not done. Command word Unmark is not case-sensitive.
 Format: Unmark <number shown in list>
 
 Example:
-> unmark 1
+> unmark 1 <br/>
 > unmark 3
 
 Expected output:
@@ -128,7 +128,7 @@ Finds all tasks whose description contains the keyword.
 Both command word find, and keyword are not case-sensitive.
 
 Example:
-> find quiz
+> find quiz <br/>
 > find window
 
 Expected output:
