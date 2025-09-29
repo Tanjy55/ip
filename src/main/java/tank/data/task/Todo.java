@@ -1,7 +1,7 @@
 package tank.data.task;
 
 /**
- * Represents a Todo Task in the list of Tasks
+ * Todo Task type
  */
 public class Todo extends Task {
 

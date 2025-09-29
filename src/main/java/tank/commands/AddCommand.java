@@ -17,7 +17,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Add a task and prints result using ui.
+     * Add a task and prints result using ui
      *
      * @param taskList TaskList to add to
      * @return CommandResult with success message

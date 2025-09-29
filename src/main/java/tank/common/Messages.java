@@ -1,13 +1,13 @@
 package tank.common;
 
 /**
- * Container for user visible messages.
+ * Container for user visible messages
  */
 public class Messages {
     public static final String DOTTED_LINES = "____________________________________________________________\n";
     public static final String INVALID_INPUT = "Hey I didnt understand that, did you mean something else?\n";
     public static final String HELP_SHEET = """
-            Valid inputs are:\s
+            Valid inputs are:
             1) "list", display the current list of tasks
             2) "mark", mark the specified task as done
             3) "unmark", mark the specified task as not done

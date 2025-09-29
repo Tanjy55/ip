@@ -1,21 +1,8 @@
 ____________________________________________________________
-Hello! I'm Tank
-I'm here to help track your tasks, what shall we talk about today?
+Hello! I'm Tank!
+I'm here to help track your tasks,what shall we talk about today?
 ____________________________________________________________
-____________________________________________________________
-Added Todo successfully!
-	[T][ ] a
- Now you have 1 tasks in the list.
-____________________________________________________________
-	Here are the tasks in your list:
-	1.[T][ ] a
-____________________________________________________________
-____________________________________________________________
-Added that. Let's get it boss!
-	[D][ ] x (by: y)
- Now you have 2 tasks in the list.
-____________________________________________________________
-____________________________________________________________
+
 Hey I didnt understand that, did you mean something else?
 Valid inputs are:
 1) "list", display the current list of tasks
@@ -25,68 +12,296 @@ Valid inputs are:
 5) "todo", add the description afterwards to add this to the list
 6) "deadline", add "\by" followed by the date to add this to the list
 7) "event", add "\from" then date and "\to" then date
-8) "bye" to finish the chat
+8) "find", then type in the keyword to search
+9) "bye" to finish the chat
+
+Or, see the userguide @ https://tanjy55.github.io/ip/ !
 ____________________________________________________________
-	Here are the tasks in your list:
-	1.[T][ ] a
-	2.[D][ ] x (by: y)
+	Displayed help message above
 ____________________________________________________________
+
+Here are the tasks in the list
 ____________________________________________________________
-Event has been added!
-	[E][ ] t (from: 5, to: 6)
+	Displayed list successfully
+____________________________________________________________
+
+Hey I didnt understand that, did you mean something else?
+Valid inputs are:
+1) "list", display the current list of tasks
+2) "mark", mark the specified task as done
+3) "unmark", mark the specified task as not done
+4) "delete", delete the specified task
+5) "todo", add the description afterwards to add this to the list
+6) "deadline", add "\by" followed by the date to add this to the list
+7) "event", add "\from" then date and "\to" then date
+8) "find", then type in the keyword to search
+9) "bye" to finish the chat
+
+Or, see the userguide @ https://tanjy55.github.io/ip/ !
+____________________________________________________________
+	Displayed help message above
+____________________________________________________________
+
+Added this task:
+	[T][ ] water plants
+ Now you have 1 tasks in the list.
+____________________________________________________________
+	Add complete
+____________________________________________________________
+
+Hey I didnt understand that, did you mean something else?
+Valid inputs are:
+1) "list", display the current list of tasks
+2) "mark", mark the specified task as done
+3) "unmark", mark the specified task as not done
+4) "delete", delete the specified task
+5) "todo", add the description afterwards to add this to the list
+6) "deadline", add "\by" followed by the date to add this to the list
+7) "event", add "\from" then date and "\to" then date
+8) "find", then type in the keyword to search
+9) "bye" to finish the chat
+
+Or, see the userguide @ https://tanjy55.github.io/ip/ !
+____________________________________________________________
+	Displayed help message above
+____________________________________________________________
+
+Here are the tasks in the list
+	1.[T][ ] water plants
+____________________________________________________________
+	Displayed list successfully
+____________________________________________________________
+
+Hey I didnt understand that, did you mean something else?
+Valid inputs are:
+1) "list", display the current list of tasks
+2) "mark", mark the specified task as done
+3) "unmark", mark the specified task as not done
+4) "delete", delete the specified task
+5) "todo", add the description afterwards to add this to the list
+6) "deadline", add "\by" followed by the date to add this to the list
+7) "event", add "\from" then date and "\to" then date
+8) "find", then type in the keyword to search
+9) "bye" to finish the chat
+
+Or, see the userguide @ https://tanjy55.github.io/ip/ !
+____________________________________________________________
+	Displayed help message above
+____________________________________________________________
+
+____________________________________________________________
+	Hmmm something went wrong, check if you forgot to include: /by
+____________________________________________________________
+
+____________________________________________________________
+	Invalid input, some information is missing!
+____________________________________________________________
+
+____________________________________________________________
+	Please give date and time the format: DD/MM/YYYY HHMM
+____________________________________________________________
+
+Added this task:
+	[D][ ] submit assignment (by: Jun 05 2023)
+ Now you have 2 tasks in the list.
+____________________________________________________________
+	Add complete
+____________________________________________________________
+
+Hey I didnt understand that, did you mean something else?
+Valid inputs are:
+1) "list", display the current list of tasks
+2) "mark", mark the specified task as done
+3) "unmark", mark the specified task as not done
+4) "delete", delete the specified task
+5) "todo", add the description afterwards to add this to the list
+6) "deadline", add "\by" followed by the date to add this to the list
+7) "event", add "\from" then date and "\to" then date
+8) "find", then type in the keyword to search
+9) "bye" to finish the chat
+
+Or, see the userguide @ https://tanjy55.github.io/ip/ !
+____________________________________________________________
+	Displayed help message above
+____________________________________________________________
+
+Here are the tasks in the list
+	1.[T][ ] water plants
+	2.[D][ ] submit assignment (by: Jun 05 2023)
+____________________________________________________________
+	Displayed list successfully
+____________________________________________________________
+
+Hey I didnt understand that, did you mean something else?
+Valid inputs are:
+1) "list", display the current list of tasks
+2) "mark", mark the specified task as done
+3) "unmark", mark the specified task as not done
+4) "delete", delete the specified task
+5) "todo", add the description afterwards to add this to the list
+6) "deadline", add "\by" followed by the date to add this to the list
+7) "event", add "\from" then date and "\to" then date
+8) "find", then type in the keyword to search
+9) "bye" to finish the chat
+
+Or, see the userguide @ https://tanjy55.github.io/ip/ !
+____________________________________________________________
+	Displayed help message above
+____________________________________________________________
+
+____________________________________________________________
+	Hmmm something went wrong, check if you forgot to include: /from or /to
+____________________________________________________________
+
+____________________________________________________________
+	Invalid input, some information is missing!
+____________________________________________________________
+
+____________________________________________________________
+	Invalid input, some information is missing!
+____________________________________________________________
+
+____________________________________________________________
+	Invalid input, some information is missing!
+____________________________________________________________
+
+____________________________________________________________
+	Please give date and time the format: DD/MM/YYYY HHMM
+____________________________________________________________
+
+Added this task:
+	[E][ ] concert (from: Jan 01 2025, to: Jan 01 2025)
  Now you have 3 tasks in the list.
 ____________________________________________________________
-	Here are the tasks in your list:
-	1.[T][ ] a
-	2.[D][ ] x (by: y)
-	3.[E][ ] t (from: 5, to: 6)
+	Add complete
 ____________________________________________________________
-____________________________________________________________
-	Task marked as done! Nice job :)
-		[T][X] a
-____________________________________________________________
-____________________________________________________________
-	Task marked as not done :(
-		[T][ ] a
-____________________________________________________________
-____________________________________________________________
-	Task marked as done! Nice job :)
-		[D][X] x (by: y)
-____________________________________________________________
-	Here are the tasks in your list:
-	1.[T][ ] a
-	2.[D][X] x (by: y)
-	3.[E][ ] t (from: 5, to: 6)
-____________________________________________________________
-____________________________________________________________
-Task deleted successfully! Displaying new list:
 
-	Here are the tasks in your list:
-	1.[T][ ] a
-	2.[D][X] x (by: y)
+Hey I didnt understand that, did you mean something else?
+Valid inputs are:
+1) "list", display the current list of tasks
+2) "mark", mark the specified task as done
+3) "unmark", mark the specified task as not done
+4) "delete", delete the specified task
+5) "todo", add the description afterwards to add this to the list
+6) "deadline", add "\by" followed by the date to add this to the list
+7) "event", add "\from" then date and "\to" then date
+8) "find", then type in the keyword to search
+9) "bye" to finish the chat
+
+Or, see the userguide @ https://tanjy55.github.io/ip/ !
 ____________________________________________________________
-Error: Invalid command given
+	Displayed help message above
 ____________________________________________________________
-Hmmm something went wrong, check if you forgot to include: /by
+
+Here are the tasks in the list
+	1.[T][ ] water plants
+	2.[D][ ] submit assignment (by: Jun 05 2023)
+	3.[E][ ] concert (from: Jan 01 2025, to: Jan 01 2025)
 ____________________________________________________________
-Invalid deadline format, did you forget to specify the deadline correctly?
+	Displayed list successfully
 ____________________________________________________________
-Invalid deadline format, did you forget to specify the deadline correctly?
+
 ____________________________________________________________
-Error: Invalid command given
+	Invalid Number given!
 ____________________________________________________________
-Hmmm something went wrong, check if you forgot to include: /from or /to
+
 ____________________________________________________________
-Hmmm something went wrong, check if you forgot to include: /from or /to
+	Invalid Index
 ____________________________________________________________
-Invalid event format, did you forget to specify the details correctly?
+
+Marked this task as done!
+	[T][X] water plants
 ____________________________________________________________
-	Here are the tasks in your list:
-	1.[T][ ] a
-	2.[D][X] x (by: y)
+	Mark successful
+____________________________________________________________
+
+Marked this task as done!
+	[D][X] submit assignment (by: Jun 05 2023)
+____________________________________________________________
+	Mark successful
+____________________________________________________________
+
+Marked this task as done!
+	[E][X] concert (from: Jan 01 2025, to: Jan 01 2025)
+____________________________________________________________
+	Mark successful
+____________________________________________________________
+
+____________________________________________________________
+	Invalid Number given!
+____________________________________________________________
+
+Marked this task as not done!
+	[T][ ] water plants
+____________________________________________________________
+	Unmark successful
+____________________________________________________________
+
+Marked this task as not done!
+	[D][ ] submit assignment (by: Jun 05 2023)
+____________________________________________________________
+	Unmark successful
+____________________________________________________________
+
+Marked this task as not done!
+	[E][ ] concert (from: Jan 01 2025, to: Jan 01 2025)
+____________________________________________________________
+	Unmark successful
+____________________________________________________________
+
+____________________________________________________________
+	Invalid Index
+____________________________________________________________
+
+Here are the matching tasks in your list:
+	1.[T][ ] water plants
+____________________________________________________________
+	Search complete
+____________________________________________________________
+
+Here are the matching tasks in your list:
+	1.[E][ ] concert (from: Jan 01 2025, to: Jan 01 2025)
+____________________________________________________________
+	Search complete
+____________________________________________________________
+
+Here are the tasks in the list
+	1.[T][ ] water plants
+	2.[D][ ] submit assignment (by: Jun 05 2023)
+	3.[E][ ] concert (from: Jan 01 2025, to: Jan 01 2025)
+____________________________________________________________
+	Displayed list successfully
+____________________________________________________________
+
+Removing this task...
+	[E][ ] concert (from: Jan 01 2025, to: Jan 01 2025)
+ Now you have 2 tasks in the list.
+____________________________________________________________
+	Delete successful
+____________________________________________________________
+
+Removing this task...
+	[D][ ] submit assignment (by: Jun 05 2023)
+ Now you have 1 tasks in the list.
+____________________________________________________________
+	Delete successful
+____________________________________________________________
+
+Removing this task...
+	[T][ ] water plants
+ Now you have 0 tasks in the list.
+____________________________________________________________
+	Delete successful
+____________________________________________________________
+
+Here are the tasks in the list
+____________________________________________________________
+	Displayed list successfully
+____________________________________________________________
+
+____________________________________________________________
+	Exiting Tank
 ____________________________________________________________
 ____________________________________________________________
 Bye. Hope to see you again soon!
 ____________________________________________________________
-
-Process finished with exit code 0

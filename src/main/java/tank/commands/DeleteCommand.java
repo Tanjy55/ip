@@ -8,7 +8,7 @@ import tank.ui.TextUi;
 import java.util.ArrayList;
 
 /**
- * Removes a Task to TaskList
+ * Removes a Task from TaskList
  */
 public class DeleteCommand extends Command {
     private int arrayIndex;
@@ -20,7 +20,7 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Removes a task and prints result using ui.
+     * Removes a task and prints result using ui
      * If unsuccessful, return CommandResult with error message
      *
      * @param taskList TaskList to delete from
@@ -41,7 +41,7 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Fetch index validity of Task index to be deleted
+     * Check index validity of Task index to be deleted
      *
      * @param list  TaskList to delete from
      * @param index Index of Task to delete
