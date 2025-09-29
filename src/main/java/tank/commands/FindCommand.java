@@ -7,8 +7,7 @@ import tank.ui.TextUi;
 import java.util.ArrayList;
 
 /**
- * Find and list Tasks whose description contains argument keywords
- * Keyword matching is case-sensitive
+ * Implemented find tasks whose description contains argument keywords
  */
 public class FindCommand extends Command {
     private String keyWord;
@@ -22,6 +21,7 @@ public class FindCommand extends Command {
     /**
      * Iterates through TaskList
      * Print all Tasks which description contains keywords
+     * Keyword matching is not case-sensitive
      *
      * @param taskList TaskList to search from
      * @return CommandResult with message of search result
