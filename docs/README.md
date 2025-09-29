@@ -13,7 +13,7 @@ Enjoy!
 ## Quick start
 1) Ensure you have Java 17 or above installed in your Computer.
 
-2) Download the latest .jar file from [here](https://github.com/Tanjy55/ip/releases/tag/).
+2) Download the latest .jar file from [here](https://github.com/Tanjy55/ip/releases/tag/Merging-PRs).
 
 3) Copy the file to the folder you want to use as the home folder for running Tank.
 
